@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff9ee"/><stop offset=".55" stop-color="#eaf5ff"/><stop offset="1" stop-color="#f9dfd4"/></linearGradient><linearGradient id="t" x1="0" x2="1"><stop stop-color="#244dd8"/><stop offset=".55" stop-color="#7c4dff"/><stop offset="1" stop-color="#ef765f"/></linearGradient></defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <circle cx="1050" cy="100" r="210" fill="#244dd8" opacity=".13"/><circle cx="190" cy="550" r="230" fill="#ef765f" opacity=".15"/>
+  <text x="90" y="230" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="900" fill="#172238">Safayet Ullah</text>
+  <text x="90" y="320" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="900" fill="url(#t)">Interactive 3D Portfolio</text>
+  <text x="90" y="405" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#667085">Next.js · React Three Fiber · Premium responsive UI</text>
+  <rect x="90" y="470" width="280" height="72" rx="36" fill="#244dd8"/><text x="230" y="517" text-anchor="middle" font-family="Arial" font-size="28" font-weight="900" fill="white">View Projects</text>
+</svg>

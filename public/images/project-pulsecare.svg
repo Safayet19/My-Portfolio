@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#eaf5ff"/><stop offset=".55" stop-color="#fff9ee"/><stop offset="1" stop-color="#dcfff7"/></linearGradient></defs>
+  <rect width="980" height="620" fill="url(#g)"/>
+  <rect x="92" y="80" width="796" height="460" rx="44" fill="white" opacity=".82"/>
+  <rect x="132" y="125" width="230" height="370" rx="30" fill="#17a88b" opacity=".95"/>
+  <rect x="402" y="126" width="210" height="128" rx="28" fill="#eaf5ff"/><rect x="642" y="126" width="210" height="128" rx="28" fill="#fde6df"/>
+  <rect x="402" y="288" width="450" height="207" rx="30" fill="#f2f6ff"/>
+  <path d="M444 402h78l24-64 46 128 40-84h178" fill="none" stroke="#ef765f" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="168" y="198" font-family="Arial" font-size="34" font-weight="900" fill="white">PulseCare</text>
+  <text x="168" y="240" font-family="Arial" font-size="19" font-weight="700" fill="#ddfff8">Health Portal</text>
+  <circle cx="246" cy="355" r="62" fill="white" opacity=".92"/><path d="M246 312v86M203 355h86" stroke="#17a88b" stroke-width="26" stroke-linecap="round"/>
+</svg>

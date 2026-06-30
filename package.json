@@ -1,0 +1,27 @@
+{
+  "name": "safayet-ullah-3d-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A premium reusable interactive 3D portfolio for Safayet Ullah, built with Next.js, React Three Fiber, and responsive design.",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@react-three/drei": "latest",
+    "@react-three/fiber": "latest",
+    "lucide-react": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "three": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/three": "latest",
+    "typescript": "latest"
+  }
+}
