@@ -1,7 +1,10 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { ArrowDownRight, Download, Sparkle } from 'lucide-react';
 import { site } from '@/data/site';
+import { iconMap } from '@/components/ui/iconMap';
 
 const InteractiveScene = dynamic(() => import('@/components/three/InteractiveScene').then((mod) => mod.InteractiveScene), {
   ssr: false,
@@ -47,7 +50,7 @@ export function Hero() {
 
           <div className="hero-socials" aria-label="Social links">
             {site.social.map((item) => {
-              const Icon = item.icon;
+              const Icon = iconMap[item.icon];
               return (
                 <a className="icon-link" href={item.href} key={item.label} aria-label={item.label} target={item.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
                   <Icon size={18} />

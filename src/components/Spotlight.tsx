@@ -1,5 +1,8 @@
+'use client';
+
 import { site } from '@/data/site';
 import { MouseGlow } from '@/components/ui/MouseGlow';
+import { iconMap } from '@/components/ui/iconMap';
 
 export function Spotlight() {
   return (
@@ -18,7 +21,7 @@ export function Spotlight() {
 
           <div className="principles-grid">
             {site.principles.map((item) => {
-              const Icon = item.icon;
+              const Icon = iconMap[item.icon];
               return (
                 <MouseGlow className="principle-card" key={item.title}>
                   <div className="card-icon">

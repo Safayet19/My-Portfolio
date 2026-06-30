@@ -1,6 +1,9 @@
+'use client';
+
 import { site } from '@/data/site';
 import { MouseGlow } from '@/components/ui/MouseGlow';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { iconMap } from '@/components/ui/iconMap';
 
 export function Skills() {
   return (
@@ -15,7 +18,7 @@ export function Skills() {
 
         <div className="skills-layout">
           {site.skillGroups.map((group) => {
-            const Icon = group.icon;
+            const Icon = iconMap[group.icon];
             return (
               <MouseGlow className="skill-card" key={group.title}>
                 <div className="card-icon">

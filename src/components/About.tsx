@@ -1,8 +1,11 @@
+'use client';
+
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import { site } from '@/data/site';
 import { MouseGlow } from '@/components/ui/MouseGlow';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { iconMap } from '@/components/ui/iconMap';
 
 export function About() {
   return (
@@ -42,7 +45,7 @@ export function About() {
 
           <div className="focus-grid">
             {site.focusCards.map((card) => {
-              const Icon = card.icon;
+              const Icon = iconMap[card.icon];
               return (
                 <MouseGlow className="focus-card" key={card.title}>
                   <div className="card-icon">

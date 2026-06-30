@@ -1,28 +1,25 @@
-import type { LucideIcon } from 'lucide-react';
-import {
-  Blocks,
-  BrainCircuit,
-  Code2,
-  Database,
-  ExternalLink,
-  Github,
-  GraduationCap,
-  Layers3,
-  Mail,
-  MapPin,
-  Rocket,
-  ShieldCheck,
-  Sparkles,
-  TerminalSquare,
-  Trophy,
-  UserRound,
-  Zap
-} from 'lucide-react';
+export type IconName =
+  | 'Blocks'
+  | 'BrainCircuit'
+  | 'Code2'
+  | 'Database'
+  | 'ExternalLink'
+  | 'Github'
+  | 'GraduationCap'
+  | 'Layers3'
+  | 'Mail'
+  | 'Rocket'
+  | 'ShieldCheck'
+  | 'Sparkles'
+  | 'SquareTerminal'
+  | 'Trophy'
+  | 'UserRound'
+  | 'Zap';
 
 export type SocialLink = {
   label: string;
   href: string;
-  icon: LucideIcon;
+  icon: IconName;
 };
 
 export type Project = {
@@ -64,9 +61,9 @@ export const site = {
     { label: 'Reusable Components', value: '25+' }
   ],
   social: [
-    { label: 'GitHub', href: 'https://github.com/yourusername', icon: Github },
-    { label: 'Email', href: 'mailto:safayet.ullah@example.com', icon: Mail },
-    { label: 'Live Work', href: '#projects', icon: ExternalLink }
+    { label: 'GitHub', href: 'https://github.com/yourusername', icon: 'Github' },
+    { label: 'Email', href: 'mailto:safayet.ullah@example.com', icon: 'Mail' },
+    { label: 'Live Work', href: '#projects', icon: 'ExternalLink' }
   ] satisfies SocialLink[],
   nav: [
     { label: 'About', href: '#about' },
@@ -77,17 +74,17 @@ export const site = {
   ],
   focusCards: [
     {
-      icon: Sparkles,
+      icon: 'Sparkles',
       title: 'Experience-first UI',
       text: 'Layouts, motion, and micro-interactions are designed around clarity, not decoration.'
     },
     {
-      icon: Layers3,
+      icon: 'Layers3',
       title: 'Real-time 3D scenes',
       text: 'Procedural WebGL visuals create a premium feel without heavy model files.'
     },
     {
-      icon: ShieldCheck,
+      icon: 'ShieldCheck',
       title: 'Performance minded',
       text: 'Mobile fallbacks, lightweight assets, semantic HTML, and accessible navigation are included.'
     }
@@ -95,22 +92,22 @@ export const site = {
   skillGroups: [
     {
       title: 'Frontend Craft',
-      icon: Code2,
+      icon: 'Code2',
       skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3', 'Responsive UI']
     },
     {
       title: '3D & Motion',
-      icon: Blocks,
+      icon: 'Blocks',
       skills: ['Three.js', 'React Three Fiber', 'Drei', 'Framer Motion', 'Scroll Motion', 'WebGL Basics']
     },
     {
       title: 'Product Thinking',
-      icon: BrainCircuit,
+      icon: 'BrainCircuit',
       skills: ['UX Strategy', 'Design Systems', 'Case Studies', 'Accessibility', 'SEO Basics']
     },
     {
       title: 'Backend Basics',
-      icon: Database,
+      icon: 'Database',
       skills: ['Node.js', 'REST APIs', 'MongoDB', 'MySQL', 'Firebase', 'Auth Flows']
     }
   ],
@@ -188,12 +185,12 @@ export const site = {
     }
   ] satisfies ExperienceItem[],
   principles: [
-    { icon: Rocket, title: 'Fast first impression', text: 'The first screen explains who you are, what you do, and why the visitor should continue.' },
-    { icon: TerminalSquare, title: 'Clean engineering', text: 'Data-driven content, reusable components, typed structures, and clear folder organization.' },
-    { icon: Trophy, title: 'Proof over decoration', text: 'Projects include role, stack, highlights, and direct links so recruiters can evaluate quickly.' },
-    { icon: UserRound, title: 'Personal brand', text: 'A warm non-black visual identity helps the site stand apart from common dark portfolios.' },
-    { icon: GraduationCap, title: 'Student-ready', text: 'Built for a university profile today, but scalable for internships, freelance work, and jobs later.' },
-    { icon: Zap, title: 'Interactive but usable', text: '3D adds memorability while the content remains easy to read on mobile and desktop.' }
+    { icon: 'Rocket', title: 'Fast first impression', text: 'The first screen explains who you are, what you do, and why the visitor should continue.' },
+    { icon: 'SquareTerminal', title: 'Clean engineering', text: 'Data-driven content, reusable components, typed structures, and clear folder organization.' },
+    { icon: 'Trophy', title: 'Proof over decoration', text: 'Projects include role, stack, highlights, and direct links so recruiters can evaluate quickly.' },
+    { icon: 'UserRound', title: 'Personal brand', text: 'A warm non-black visual identity helps the site stand apart from common dark portfolios.' },
+    { icon: 'GraduationCap', title: 'Student-ready', text: 'Built for a university profile today, but scalable for internships, freelance work, and jobs later.' },
+    { icon: 'Zap', title: 'Interactive but usable', text: '3D adds memorability while the content remains easy to read on mobile and desktop.' }
   ],
   testimonials: [
     {

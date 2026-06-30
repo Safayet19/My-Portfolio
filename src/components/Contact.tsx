@@ -1,3 +1,5 @@
+'use client';
+
 import { Mail, MapPin, Send } from 'lucide-react';
 import { site } from '@/data/site';
 

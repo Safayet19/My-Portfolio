@@ -1,3 +1,5 @@
+'use client';
+
 import { site } from '@/data/site';
 import { MouseGlow } from '@/components/ui/MouseGlow';
 import { SectionHeader } from '@/components/ui/SectionHeader';

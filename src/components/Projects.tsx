@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { ExternalLink, Github } from 'lucide-react';
 import { site } from '@/data/site';
