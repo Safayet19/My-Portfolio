@@ -1825,3 +1825,232 @@ body > .project-modal .project-modal__dialog {
   position: relative !important;
   z-index: 2 !important;
 }
+
+/* ============================================================
+   FINAL PROJECT DETAIL LAYOUT
+   Image gallery on top, details below, single close button.
+   ============================================================ */
+body > .project-modal {
+  align-items: center !important;
+  justify-content: center !important;
+  padding: clamp(1rem, 2vw, 2.4rem) !important;
+  background: rgba(5, 10, 12, .72) !important;
+}
+
+.project-modal__backdrop {
+  background: rgba(5, 10, 12, .72) !important;
+  backdrop-filter: blur(8px) saturate(110%) !important;
+}
+
+.project-modal__dialog {
+  display: block !important;
+  grid-template-columns: none !important;
+  width: min(1060px, 95vw) !important;
+  max-height: 91vh !important;
+  overflow: auto !important;
+  border-radius: 1.1rem !important;
+  background: #f8fbf7 !important;
+  border: 1px solid rgba(220, 232, 226, .95) !important;
+  box-shadow: 0 34px 90px rgba(0, 0, 0, .38) !important;
+}
+
+.project-modal__close {
+  position: absolute !important;
+  top: 1.2rem !important;
+  right: 1.2rem !important;
+  z-index: 20 !important;
+  width: 4.8rem !important;
+  height: 4.8rem !important;
+  min-width: 4.8rem !important;
+  min-height: 4.8rem !important;
+  border-radius: 50% !important;
+  border: 3px solid #ffffff !important;
+  background: #ffb000 !important;
+  color: #101816 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .28) !important;
+  transform: none !important;
+}
+
+.project-modal__close i {
+  display: none !important;
+}
+
+.project-modal__close-fallback {
+  display: block !important;
+  color: #101816 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 2.25rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.project-modal__close:hover,
+.project-modal__close:focus-visible {
+  background: #101816 !important;
+  border-color: #ffb000 !important;
+  outline: none !important;
+  transform: scale(1.04) !important;
+}
+
+.project-modal__close:hover .project-modal__close-fallback,
+.project-modal__close:focus-visible .project-modal__close-fallback {
+  color: #ffffff !important;
+}
+
+.pm-close-inline {
+  display: none !important;
+}
+
+.project-modal__gallery {
+  position: relative !important;
+  height: clamp(28rem, 58vh, 56rem) !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 1.1rem 1.1rem 0 0 !important;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(53, 218, 195, .14), transparent 32%),
+    radial-gradient(circle at 86% 20%, rgba(255, 176, 0, .16), transparent 34%),
+    linear-gradient(135deg, #f8fbf7 0%, #edf8f3 48%, #fff7e8 100%) !important;
+}
+
+.project-modal__gallery img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background: transparent !important;
+}
+
+.gallery-arrow {
+  top: 50% !important;
+  width: 4.8rem !important;
+  height: 4.8rem !important;
+  border: 1px solid rgba(16, 24, 22, .10) !important;
+  background: rgba(255, 255, 255, .94) !important;
+  color: #101816 !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .18) !important;
+}
+
+.gallery-arrow:hover {
+  background: #101816 !important;
+  color: #ffffff !important;
+}
+
+.gallery-dots {
+  bottom: 1.2rem !important;
+  padding: .7rem 1rem !important;
+  background: rgba(16, 24, 22, .32) !important;
+  border-radius: 999rem !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.project-modal__body {
+  padding: clamp(2.8rem, 4vw, 4.8rem) !important;
+  overflow: visible !important;
+  color: #101816 !important;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(53, 218, 195, .10), transparent 34%),
+    radial-gradient(circle at 100% 0%, rgba(255, 176, 0, .10), transparent 36%),
+    linear-gradient(180deg, #ffffff 0%, #f6faf7 100%) !important;
+}
+
+.project-modal__body .eyebrow,
+#pmType {
+  color: #17342e !important;
+  -webkit-text-fill-color: #17342e !important;
+  border-color: rgba(38, 181, 153, .24) !important;
+  background: rgba(38, 181, 153, .10) !important;
+  box-shadow: none !important;
+}
+
+#pmTitle,
+.project-modal__body h3 {
+  max-width: 900px !important;
+  margin: 1.6rem 0 1.4rem !important;
+  color: #101816 !important;
+  -webkit-text-fill-color: #101816 !important;
+  background: none !important;
+  text-shadow: none !important;
+  font-size: clamp(3rem, 4vw, 4.8rem) !important;
+  line-height: 1.12 !important;
+}
+
+#pmDesc,
+.project-modal__body p {
+  max-width: 920px !important;
+  color: #2d403a !important;
+  -webkit-text-fill-color: #2d403a !important;
+  font-size: clamp(1.58rem, 1.45vw, 1.86rem) !important;
+  line-height: 1.82 !important;
+  font-weight: 750 !important;
+  text-shadow: none !important;
+}
+
+.project-modal .pm-section {
+  max-width: 920px !important;
+  margin-top: 2.8rem !important;
+  padding-top: 2.2rem !important;
+  border-top: 1px solid rgba(38, 181, 153, .18) !important;
+}
+
+.project-modal .pm-section h4 {
+  color: #145f51 !important;
+  -webkit-text-fill-color: #145f51 !important;
+  font-size: 1.35rem !important;
+  font-weight: 1000 !important;
+}
+
+.project-modal .pm-list li {
+  color: #263a34 !important;
+  -webkit-text-fill-color: #263a34 !important;
+  font-size: 1.55rem !important;
+  line-height: 1.72 !important;
+  font-weight: 700 !important;
+}
+
+.project-modal .project-tech span,
+#pmTech span {
+  color: #15322c !important;
+  -webkit-text-fill-color: #15322c !important;
+  background: #eaf7f2 !important;
+  border: 1px solid rgba(38, 181, 153, .24) !important;
+  box-shadow: none !important;
+}
+
+.pm-btn,
+#pmGithub {
+  color: #0b1411 !important;
+  -webkit-text-fill-color: #0b1411 !important;
+  background: linear-gradient(135deg, #35dac3, #ffcf6b) !important;
+  border-radius: .8rem !important;
+  box-shadow: 0 18px 36px -24px rgba(18, 151, 127, .95) !important;
+}
+
+@media (max-width: 700px) {
+  .project-modal__gallery {
+    height: clamp(22rem, 42vh, 36rem) !important;
+  }
+
+  .project-modal__body {
+    padding: 2.4rem 1.8rem 3rem !important;
+  }
+
+  .project-modal__close {
+    top: .8rem !important;
+    right: .8rem !important;
+    width: 4.3rem !important;
+    height: 4.3rem !important;
+    min-width: 4.3rem !important;
+    min-height: 4.3rem !important;
+  }
+}
