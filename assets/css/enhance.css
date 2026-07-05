@@ -1,0 +1,1827 @@
+/* ============================================================
+   Portfolio Enhancements — polish + animations for
+   About → Skills → Education → Projects → Experience →
+   Research → Certifications → Contact
+   Non-destructive: only adds/overrides visuals & motion.
+   ============================================================ */
+
+:root {
+  --grad-primary: linear-gradient(135deg, #2506ad 0%, #4f46e5 55%, #00d9ff 100%);
+  --grad-accent:  linear-gradient(135deg, #ff7b00 0%, #ff3d81 100%);
+  --grad-soft:    linear-gradient(180deg, #ffffff 0%, #f2f7ff 100%);
+  --ring-primary: 0 0 0 1px rgba(79, 70, 229, 0.18), 0 30px 60px -30px rgba(37, 6, 173, 0.35);
+  --ring-hover:   0 0 0 1px rgba(79, 70, 229, 0.35), 0 40px 80px -30px rgba(37, 6, 173, 0.45);
+  --ease-out-soft: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ---------- Reveal on scroll ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s var(--ease-out-soft), transform .9s var(--ease-out-soft);
+  will-change: opacity, transform;
+}
+[data-reveal="left"]  { transform: translateX(-40px); }
+[data-reveal="right"] { transform: translateX(40px); }
+[data-reveal="zoom"]  { transform: scale(.94); }
+[data-reveal].in-view { opacity: 1; transform: none; }
+
+/* Stagger children */
+[data-stagger] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s var(--ease-out-soft), transform .8s var(--ease-out-soft);
+}
+[data-stagger].in-view > * { opacity: 1; transform: none; }
+[data-stagger].in-view > *:nth-child(1)  { transition-delay: .05s; }
+[data-stagger].in-view > *:nth-child(2)  { transition-delay: .12s; }
+[data-stagger].in-view > *:nth-child(3)  { transition-delay: .19s; }
+[data-stagger].in-view > *:nth-child(4)  { transition-delay: .26s; }
+[data-stagger].in-view > *:nth-child(5)  { transition-delay: .33s; }
+[data-stagger].in-view > *:nth-child(6)  { transition-delay: .40s; }
+[data-stagger].in-view > *:nth-child(7)  { transition-delay: .47s; }
+[data-stagger].in-view > *:nth-child(8)  { transition-delay: .54s; }
+[data-stagger].in-view > *:nth-child(9)  { transition-delay: .60s; }
+[data-stagger].in-view > *:nth-child(10) { transition-delay: .66s; }
+[data-stagger].in-view > *:nth-child(11) { transition-delay: .72s; }
+
+/* ---------- Section headings — animated gradient underline ---------- */
+.section-heading h2 {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(90deg, #06235f, #2506ad 55%, #4f46e5);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-heading.center-heading h2::after,
+.section-heading.left-heading h2::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 0;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: var(--grad-primary);
+  transition: width 1s var(--ease-out-soft) .1s;
+}
+.section-heading.center-heading h2::after { margin-left: auto; margin-right: auto; }
+.section-heading.in-view h2::after { width: 96px; }
+.section-heading.center-heading.in-view h2::after { width: 120px; }
+
+.eyebrow {
+  background: linear-gradient(135deg, rgba(37,6,173,.08), rgba(0,217,255,.10)) !important;
+  transition: transform .4s var(--ease-out-soft), box-shadow .4s var(--ease-out-soft);
+}
+.eyebrow:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -12px rgba(37, 6, 173, .35); }
+
+/* ---------- Universal card hover polish ---------- */
+.about-card, .mini-card, .skill-card, .education-card,
+.project-card, .experience-item, .research-card, .cert-info-card {
+  transition: transform .5s var(--ease-out-soft), box-shadow .5s var(--ease-out-soft), border-color .3s;
+  will-change: transform;
+}
+
+.mini-card, .skill-card, .project-card, .education-card, .research-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.mini-card::before, .skill-card::before, .project-card::before,
+.education-card::before, .research-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--grad-primary);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .5s var(--ease-out-soft);
+  pointer-events: none;
+  z-index: 1;
+}
+.mini-card:hover, .skill-card:hover, .project-card:hover,
+.education-card:hover, .research-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--ring-hover);
+}
+.mini-card:hover::before, .skill-card:hover::before, .project-card:hover::before,
+.education-card:hover::before, .research-card:hover::before { opacity: 1; }
+
+/* ---------- Cursor-follow glow ---------- */
+.mini-card, .skill-card, .project-card, .research-card, .education-card, .cert-info-card {
+  --mx: 50%; --my: 50%;
+}
+.mini-card::after, .skill-card::after, .project-card::after,
+.research-card::after, .education-card::after, .cert-info-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(320px circle at var(--mx) var(--my),
+              rgba(79, 70, 229, .14), transparent 55%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.mini-card:hover::after, .skill-card:hover::after, .project-card:hover::after,
+.research-card:hover::after, .education-card:hover::after, .cert-info-card:hover::after {
+  opacity: 1;
+}
+.mini-card > *, .skill-card > *, .project-card > *,
+.research-card > *, .education-card > *, .cert-info-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- About mini icons — animated ---------- */
+.mini-card i {
+  transition: transform .5s var(--ease-out-soft);
+}
+.mini-card:hover i {
+  transform: rotate(-6deg) scale(1.12);
+}
+
+/* ---------- Skills bars — fill from 0 on reveal ---------- */
+.skill-bar span {
+  width: 0 !important;
+  transition: width 1.6s cubic-bezier(.2, .8, .2, 1);
+  background: var(--grad-primary) !important;
+  box-shadow: 0 0 20px rgba(79, 70, 229, .35);
+}
+.skill-card.in-view .skill-bar span {
+  width: var(--fill, 0%) !important;
+}
+.skill-tags span {
+  transition: transform .25s ease, background .25s ease, color .25s ease;
+}
+.skill-tags span:hover {
+  transform: translateY(-2px);
+  background: var(--grad-primary);
+  color: #fff;
+}
+
+/* ---------- Projects — floating icon + shine ---------- */
+.project-icon {
+  transition: transform .6s var(--ease-out-soft);
+}
+.project-card:hover .project-icon {
+  transform: translateY(-6px) rotate(-4deg) scale(1.08);
+}
+.project-card h3 {
+  background-image: linear-gradient(90deg, currentColor, currentColor);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size .5s var(--ease-out-soft);
+}
+.project-card:hover h3 { background-size: 100% 2px; }
+.project-tech span {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.project-tech span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -8px rgba(37, 6, 173, .35);
+}
+.project-links a {
+  position: relative;
+  transition: color .3s ease;
+}
+.project-links a::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform .3s var(--ease-out-soft);
+}
+.project-links a:hover::after { transform: translateX(4px); }
+
+/* ---------- Experience — timeline pulse ---------- */
+.experience-marker {
+  position: relative;
+  transition: transform .5s var(--ease-out-soft);
+}
+.experience-marker::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 2px solid rgba(79, 70, 229, .4);
+  opacity: 0;
+  transform: scale(.7);
+  animation: pulse-ring 2.6s var(--ease-out-soft) infinite;
+}
+.experience-item:hover .experience-marker { transform: scale(1.08) rotate(-4deg); }
+@keyframes pulse-ring {
+  0%   { opacity: .7; transform: scale(.7); }
+  70%  { opacity: 0;  transform: scale(1.6); }
+  100% { opacity: 0;  transform: scale(1.6); }
+}
+
+/* ---------- Research — glowing status pill ---------- */
+.research-status {
+  position: relative;
+  overflow: hidden;
+}
+.research-status::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .9s var(--ease-out-soft);
+}
+.research-card:hover .research-status::before { transform: translateX(120%); }
+.featured-research {
+  position: relative;
+}
+.featured-research::before { opacity: .6; }
+
+/* ---------- Certification — floating shield ---------- */
+.cert-icon {
+  animation: float 5.5s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ---------- Contact — inputs + button ---------- */
+.contact input, .contact textarea, .contact select {
+  transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.contact input:focus, .contact textarea:focus, .contact select:focus {
+  outline: none;
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, .18);
+  transform: translateY(-1px);
+}
+.contact button, .contact .btn, .contact [type="submit"] {
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s var(--ease-out-soft), box-shadow .3s ease;
+}
+.contact button:hover, .contact .btn:hover, .contact [type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -14px rgba(37, 6, 173, .55);
+}
+.contact button::after, .contact .btn::after, .contact [type="submit"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .8s var(--ease-out-soft);
+}
+.contact button:hover::after, .contact .btn:hover::after, .contact [type="submit"]:hover::after {
+  transform: translateX(120%);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal], [data-stagger] > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .cert-icon, .experience-marker::after { animation: none !important; }
+}
+
+/* ============================================================
+   MATCH HOME PAGE GRADING — same warm amber + blue radials on white
+   ============================================================ */
+#about, #skills, #education, #projects,
+#experience, #research, #certifications, #contact {
+  background:
+    radial-gradient(circle at 72% 22%, rgba(255, 196, 84, 0.26), transparent 28%),
+    radial-gradient(circle at 12% 82%, rgba(37, 99, 235, 0.13), transparent 32%),
+    #ffffff !important;
+}
+/* Alternate the radial positions so consecutive sections don't look identical */
+#skills, #projects, #research, #contact {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 196, 84, 0.24), transparent 28%),
+    radial-gradient(circle at 85% 80%, rgba(37, 99, 235, 0.14), transparent 32%),
+    #ffffff !important;
+}
+
+/* ============================================================
+   PROJECT DETAIL MODAL + GALLERY
+   ============================================================ */
+.project-modal {
+  position: fixed; inset: 0; z-index: 9999;
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.project-modal.is-open { display: flex; }
+.project-modal__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(6, 12, 40, 0.55);
+  backdrop-filter: blur(6px);
+  animation: pm-fade .25s ease;
+}
+.project-modal__dialog {
+  position: relative;
+  width: min(1180px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+  border-radius: 20px;
+  box-shadow: 0 40px 90px -20px rgba(37, 6, 173, 0.35);
+  display: block;
+  animation: pm-pop .35s var(--ease-out-soft);
+}
+@keyframes pm-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes pm-pop { from { opacity: 0; transform: translateY(20px) scale(.97) } to { opacity: 1; transform: none } }
+
+.project-modal__close {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  width: 38px; height: 38px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: rgba(15, 27, 61, .85); color: #fff;
+  display: grid; place-items: center;
+  transition: transform .3s ease, background .3s ease;
+}
+.project-modal__close:hover { transform: rotate(90deg); background: #2506ad; }
+
+.project-modal__gallery {
+  position: relative;
+  background: #0f1b3d;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+}
+.project-modal__gallery img {
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+  background: #0f1b3d;
+  transition: opacity .35s ease, transform .5s var(--ease-out-soft);
+}
+.project-modal__gallery img.swap { opacity: 0; transform: scale(1.02); }
+
+.gallery-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 2;
+  width: 46px; height: 46px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: rgba(255,255,255,.92);
+  color: #2506ad;
+  display: grid; place-items: center;
+  font-size: 18px;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,.4);
+  transition: transform .25s ease, background .25s ease, color .25s ease;
+}
+.gallery-arrow:hover {
+  background: var(--grad-primary);
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+.gallery-arrow--prev { left: 14px; }
+.gallery-arrow--next { right: 14px; }
+
+.gallery-dots {
+  position: absolute; bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 2;
+}
+.gallery-dots button {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: none; cursor: pointer;
+  background: rgba(255,255,255,.5);
+  transition: transform .25s ease, background .25s ease, width .25s ease;
+}
+.gallery-dots button.is-active {
+  background: #fff; width: 22px; border-radius: 999px;
+}
+
+.project-modal__body {
+  padding: 32px 30px;
+  color: #0f1b3d;
+}
+.project-modal__body h3 {
+  margin: 10px 0 12px;
+  font-size: 1.7rem;
+  background: linear-gradient(90deg, #06235f, #2506ad 55%, #4f46e5);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.project-modal__body p { color: #4b5b7a; line-height: 1.65; }
+.pm-section { margin-top: 20px; }
+.pm-section h4 {
+  font-size: .78rem; text-transform: uppercase; letter-spacing: .12em;
+  color: #2506ad; margin-bottom: 10px;
+}
+.pm-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.pm-list li {
+  position: relative; padding-left: 22px;
+  color: #334155; font-size: .95rem;
+}
+.pm-list li::before {
+  content: "▸"; position: absolute; left: 0;
+  color: #4f46e5; font-weight: 700;
+}
+
+body.modal-open { overflow: hidden; }
+
+.pm-actions { margin-top: 24px; }
+.pm-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 22px; border-radius: 999px;
+  background: var(--grad-primary); color: #fff !important;
+  font-weight: 600; text-decoration: none;
+  box-shadow: 0 14px 30px -12px rgba(37, 6, 173, .55);
+  transition: transform .3s var(--ease-out-soft), box-shadow .3s ease;
+}
+.pm-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(37, 6, 173, .7); }
+.pm-btn i { font-size: 1.1rem; }
+
+/* ============================================================
+   FINAL FIX — crisp vibrant professional design after Home
+   Keeps project image/modal structure intact.
+   ============================================================ */
+:root {
+  --deep-0: #050b22;
+  --deep-1: #08183d;
+  --deep-2: #10285d;
+  --neon-blue: #19d5ff;
+  --neon-violet: #7c4dff;
+  --neon-pink: #ff42d0;
+  --neon-green: #20e6b8;
+  --neon-orange: #ff8a1d;
+  --glass-border: rgba(118, 149, 255, 0.36);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg-strong: rgba(255, 255, 255, 0.12);
+  --white-text: #f7fbff;
+  --soft-text: #b9c8e8;
+}
+
+.logo-brand img,
+.footer-logo img {
+  width: 4.2rem;
+  height: 4.2rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(0, 217, 255, 0.42));
+}
+.logo-brand span {
+  background: linear-gradient(90deg, #061c46, #2506ad 55%, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* keep Home unchanged; redesign every section after it */
+#about, #skills, #education, #projects, #experience, #research, #certifications, #contact {
+  position: relative;
+  overflow: hidden;
+  color: var(--white-text);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(25, 213, 255, 0.28), transparent 26%),
+    radial-gradient(circle at 88% 14%, rgba(255, 66, 208, 0.22), transparent 28%),
+    radial-gradient(circle at 50% 104%, rgba(124, 77, 255, 0.28), transparent 34%),
+    linear-gradient(135deg, #06102c 0%, #0b1b43 48%, #190e43 100%) !important;
+}
+#about::before, #skills::before, #education::before, #projects::before,
+#experience::before, #research::before, #certifications::before, #contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at 50% 45%, black, transparent 75%);
+}
+#about::after, #skills::after, #education::after, #projects::after,
+#experience::after, #research::after, #certifications::after, #contact::after {
+  content: "";
+  position: absolute;
+  width: 45rem;
+  height: 45rem;
+  right: -15rem;
+  top: 8rem;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(25,213,255,.26), transparent 67%);
+  animation: section-orb 8s ease-in-out infinite alternate;
+}
+@keyframes section-orb {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to { transform: translate3d(-30px, 35px, 0) scale(1.08); }
+}
+#about .container, #skills .container, #education .container, #projects .container,
+#experience .container, #research .container, #certifications .container, #contact .container {
+  position: relative;
+  z-index: 2;
+}
+
+.section-heading h2 {
+  background: linear-gradient(90deg, #ffffff, #19d5ff 42%, #ff42d0 86%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: 0 0 26px rgba(25, 213, 255, 0.10);
+}
+.section-heading p,
+.main-about-card p,
+.mini-card p,
+.skill-card p,
+.education-content p,
+.project-card p,
+.experience-content p,
+.research-card p,
+.cert-info-card p,
+.contact-info-panel > p,
+.footer p {
+  color: var(--soft-text) !important;
+}
+.eyebrow, .card-label, .project-type, .cert-badge {
+  color: #dff8ff !important;
+  border: 1px solid rgba(25, 213, 255, 0.35) !important;
+  background: linear-gradient(135deg, rgba(25,213,255,.22), rgba(124,77,255,.22)) !important;
+  box-shadow: 0 0 24px rgba(25, 213, 255, 0.12) !important;
+}
+
+.about-card, .mini-card, .skill-card, .education-card, .project-card,
+.experience-item, .research-card, .cert-info-card, .cert-image-card,
+.contact-info-panel, .contact-form {
+  color: var(--white-text);
+  background: linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.055)) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 28px 65px -35px rgba(0,0,0,.82), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(10px) saturate(135%);
+}
+.about-card:hover, .mini-card:hover, .skill-card:hover, .education-card:hover,
+.project-card:hover, .experience-item:hover, .research-card:hover, .cert-info-card:hover,
+.cert-image-card:hover, .contact-info-panel:hover, .contact-form:hover {
+  transform: translateY(-8px);
+  border-color: rgba(25, 213, 255, .62) !important;
+  box-shadow: 0 34px 80px -32px rgba(25,213,255,.30), 0 0 0 1px rgba(255,66,208,.24), inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+.main-about-card h3, .mini-card h4, .skill-top h3, .education-content h3,
+.project-card h3, .experience-content h3, .research-card h3, .cert-info-card h3,
+.contact-info-panel h3 {
+  color: #ffffff !important;
+}
+.education-content h4, .experience-content span, .authors, .skill-top strong {
+  color: var(--neon-blue) !important;
+}
+
+.mini-card i, .skill-top i, .education-icon, .project-icon, .experience-marker, .cert-icon, .contact-row i {
+  background: linear-gradient(135deg, #1dd7ff 0%, #456dff 48%, #b236ff 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 0 28px rgba(25,213,255,.28), 0 10px 28px rgba(0,0,0,.25);
+}
+.mini-card:nth-child(2) i, .skill-card:nth-child(2n) .skill-top i, .project-card:nth-child(2n) .project-icon { background: linear-gradient(135deg, #2f87ff, #7c4dff) !important; }
+.mini-card:nth-child(3) i, .skill-card:nth-child(3n) .skill-top i { background: linear-gradient(135deg, #20e6b8, #00a7ff) !important; }
+.mini-card:nth-child(4) i, .skill-card:nth-child(4n) .skill-top i { background: linear-gradient(135deg, #ff42d0, #ff8a1d) !important; }
+
+.about-points span, .skill-tags span, .project-tech span, .research-meta span, .cert-details li {
+  color: #eaf7ff !important;
+  background: rgba(255,255,255,.09) !important;
+  border: 1px solid rgba(130,170,255,.25) !important;
+}
+.about-points i, .research-meta i, .cert-details i { color: var(--neon-blue) !important; }
+.skill-bar { background: rgba(255,255,255,.13) !important; }
+.skill-bar span { background: linear-gradient(90deg, #19d5ff, #7c4dff, #ff42d0) !important; }
+
+/* Project images: use uploaded/Lovable asset placement; do not edit the screenshots */
+.project-card { padding: 0 !important; }
+.project-cover {
+  position: relative;
+  height: 23rem;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: linear-gradient(135deg, rgba(25,213,255,.16), rgba(255,66,208,.18));
+}
+.project-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.01);
+  transition: transform .75s var(--ease-out-soft), filter .5s ease;
+}
+.project-card:hover .project-cover img { transform: scale(1.06); filter: saturate(1.12) contrast(1.04); }
+.project-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(5,11,34,.9));
+}
+.project-cover > span {
+  position: absolute;
+  left: 1.8rem;
+  bottom: 1.6rem;
+  z-index: 2;
+  width: 5.4rem;
+  height: 5.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 1.8rem;
+  color: #fff;
+  background: linear-gradient(135deg, #19d5ff, #7c4dff, #ff42d0);
+  box-shadow: 0 0 26px rgba(25,213,255,.35);
+  font-size: 2.3rem;
+}
+.project-cover--placeholder {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(25,213,255,.45), transparent 32%),
+    radial-gradient(circle at 80% 20%, rgba(255,66,208,.34), transparent 28%),
+    linear-gradient(135deg, #07122f, #122b64 48%, #321264);
+}
+.project-cover--placeholder > span {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  width: 8.2rem;
+  height: 8.2rem;
+  font-size: 3.4rem;
+}
+.project-card > .project-type,
+.project-card > h3,
+.project-card > p,
+.project-card > .project-tech,
+.project-card > .project-links {
+  margin-left: 2.6rem;
+  margin-right: 2.6rem;
+}
+.project-card > .project-type { margin-top: 2.2rem; }
+.project-card > .project-links { margin-bottom: 2.6rem; }
+.project-links a:first-child, .contact-form button, .pm-btn {
+  background: linear-gradient(135deg, #19d5ff 0%, #4d61ff 48%, #c93cff 100%) !important;
+  color: #fff !important;
+  border: 0 !important;
+  box-shadow: 0 16px 34px -18px rgba(25,213,255,.72);
+}
+.project-links a:last-child {
+  color: #eaf7ff !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+
+/* Keep certificate picture sharp and prominent */
+.cert-image-card img {
+  border-color: rgba(25,213,255,.32) !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 26px 70px -34px rgba(25,213,255,.45);
+}
+
+.contact-row { color: #eaf7ff !important; }
+.contact-form input, .contact-form textarea {
+  color: #fff !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(130,170,255,.28) !important;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(234,247,255,.70); }
+.contact-form input:focus, .contact-form textarea:focus {
+  border-color: #19d5ff !important;
+  box-shadow: 0 0 0 4px rgba(25,213,255,.16), 0 0 28px rgba(25,213,255,.12) !important;
+}
+
+/* professional footer: no repeated navbar */
+.professional-footer {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(25,213,255,.22), transparent 30%),
+    radial-gradient(circle at 80% 0%, rgba(255,66,208,.16), transparent 28%),
+    #050b22 !important;
+  color: #eaf7ff;
+  padding: 3.8rem 0 0 !important;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  align-items: center;
+}
+.footer-logo {
+  display: inline-flex;
+  gap: 1.2rem;
+  align-items: center;
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+.footer-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+.footer-contact a {
+  display: inline-flex;
+  gap: .8rem;
+  align-items: center;
+  color: #eaf7ff;
+  border: 1px solid rgba(25,213,255,.28);
+  background: rgba(255,255,255,.07);
+  padding: .9rem 1.2rem;
+  border-radius: 999rem;
+  font-weight: 800;
+  font-size: 1.35rem;
+  transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+.footer-contact a:hover { transform: translateY(-3px); background: rgba(25,213,255,.12); border-color: rgba(25,213,255,.52); }
+.footer-bottom { margin-top: 3.2rem !important; }
+
+@media (max-width: 992px) {
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-contact { justify-content: flex-start; }
+}
+
+
+/* Education logo cards - restored academic information */
+.academic-wrapper {
+  max-width: 1100px !important;
+}
+.academic-card {
+  align-items: center;
+}
+.education-icon.education-logo {
+  width: 9.4rem !important;
+  height: 9.4rem !important;
+  padding: .9rem !important;
+  border-radius: 2.4rem !important;
+  background: rgba(255,255,255,.96) !important;
+  border: 1px solid rgba(25,213,255,.36) !important;
+  box-shadow: 0 18px 34px rgba(0,0,0,.22), 0 0 28px rgba(25,213,255,.18) !important;
+  overflow: hidden;
+}
+.education-icon.education-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.education-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin-top: 1.4rem;
+}
+.education-tags span {
+  color: #eaf7ff !important;
+  background: rgba(255,255,255,.09) !important;
+  border: 1px solid rgba(130,170,255,.25) !important;
+  border-radius: 999rem;
+  padding: .7rem 1.05rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+@media (max-width: 620px) {
+  .education-card.academic-card {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  .education-icon.education-logo {
+    margin: 0 auto;
+  }
+  .education-tags {
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   READABILITY FIX — Project details modal and project cards
+   Makes text darker/larger on the white modal for every project.
+   ============================================================ */
+.project-modal__dialog {
+  width: min(1260px, 96vw) !important;
+  max-height: 92vh !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%) !important;
+  border: 1px solid rgba(37, 99, 235, 0.18) !important;
+  box-shadow: 0 34px 90px rgba(5, 11, 34, 0.38), 0 0 0 1px rgba(25, 213, 255, 0.14) !important;
+}
+
+.project-modal__body {
+  padding: 4.4rem 4.8rem 4.8rem !important;
+  color: #071a3c !important;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(25, 213, 255, 0.10), transparent 32%),
+    radial-gradient(circle at 100% 100%, rgba(124, 77, 255, 0.10), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f7faff 100%) !important;
+}
+
+.project-modal__body .eyebrow,
+#pmType {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: .8rem !important;
+  color: #08205a !important;
+  background: linear-gradient(135deg, rgba(25, 213, 255, 0.18), rgba(124, 77, 255, 0.16)) !important;
+  border: 1px solid rgba(37, 99, 235, 0.26) !important;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.10) !important;
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .10em !important;
+  padding: .9rem 1.6rem !important;
+}
+
+.project-modal__body h3,
+#pmTitle {
+  margin: 1.8rem 0 1.6rem !important;
+  font-size: clamp(2.6rem, 3.2vw, 4.1rem) !important;
+  line-height: 1.15 !important;
+  color: #061b46 !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #061b46 !important;
+  text-shadow: none !important;
+}
+
+.project-modal__body p,
+#pmDesc {
+  color: #31425f !important;
+  font-size: clamp(1.55rem, 1.25vw, 1.78rem) !important;
+  line-height: 1.85 !important;
+  font-weight: 500 !important;
+  max-width: none !important;
+}
+
+.pm-section {
+  margin-top: 3rem !important;
+}
+
+.pm-section h4 {
+  color: #2506ad !important;
+  font-size: 1.35rem !important;
+  font-weight: 1000 !important;
+  letter-spacing: .14em !important;
+  margin-bottom: 1.6rem !important;
+}
+
+.pm-list {
+  gap: 1.2rem !important;
+}
+
+.pm-list li {
+  color: #263856 !important;
+  font-size: clamp(1.42rem, 1.1vw, 1.62rem) !important;
+  line-height: 1.7 !important;
+  font-weight: 600 !important;
+  padding-left: 3rem !important;
+}
+
+.pm-list li::before {
+  color: #2506ad !important;
+  font-size: 1.45rem !important;
+  top: .1rem !important;
+}
+
+.project-modal .project-tech {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.2rem !important;
+}
+
+.project-modal .project-tech span,
+#pmTech span {
+  color: #08205a !important;
+  background: linear-gradient(135deg, #edf7ff, #f4f0ff) !important;
+  border: 1px solid rgba(37, 99, 235, 0.22) !important;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.08) !important;
+  font-size: 1.35rem !important;
+  font-weight: 900 !important;
+  padding: .95rem 1.45rem !important;
+}
+
+.pm-actions {
+  margin-top: 3.6rem !important;
+}
+
+.pm-btn {
+  font-size: 1.45rem !important;
+  font-weight: 900 !important;
+  padding: 1.45rem 2.4rem !important;
+  color: #fff !important;
+}
+
+/* Project card text also gets stronger and easier to read */
+.project-card h3 {
+  font-size: clamp(2rem, 1.6vw, 2.4rem) !important;
+  line-height: 1.25 !important;
+}
+
+.project-card p {
+  font-size: 1.45rem !important;
+  line-height: 1.75 !important;
+  color: #d7e5ff !important;
+}
+
+.project-card .project-tech span {
+  font-size: 1.22rem !important;
+  font-weight: 900 !important;
+}
+
+.project-links a {
+  font-size: 1.34rem !important;
+  font-weight: 900 !important;
+}
+
+@media (max-width: 768px) {
+  .project-modal__body {
+    padding: 3rem 2.2rem 3.4rem !important;
+  }
+
+  .project-modal__body h3,
+  #pmTitle {
+    font-size: 2.55rem !important;
+  }
+
+  .project-modal__body p,
+  #pmDesc,
+  .pm-list li {
+    font-size: 1.42rem !important;
+  }
+
+  .project-modal .project-tech span,
+  #pmTech span {
+    font-size: 1.22rem !important;
+  }
+}
+
+/* ============================================================
+   AESTHETIC VISUAL UPGRADE
+   Home remains untouched. Every section after Home gets a more
+   refined animated visual system with varied professional color.
+   ============================================================ */
+:root {
+  --aesthetic-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+#about, #skills, #education, #projects,
+#experience, #research, #certifications, #contact {
+  --bg-a: #111411;
+  --bg-b: #1b2118;
+  --bg-c: #121313;
+  --accent-a: 54, 219, 178;
+  --accent-b: 245, 184, 82;
+  --accent-c: 234, 88, 112;
+  --panel: rgba(255, 255, 255, .105);
+  --panel-strong: rgba(255, 255, 255, .145);
+  --panel-line: rgba(230, 244, 238, .24);
+  --text-main: #f8fbf8;
+  --text-soft: #c7d8cf;
+  --text-dim: #9fb4aa;
+  isolation: isolate;
+  background:
+    linear-gradient(116deg, rgba(var(--accent-a), .20) 0%, rgba(var(--accent-a), 0) 34%),
+    linear-gradient(248deg, rgba(var(--accent-b), .18) 0%, rgba(var(--accent-b), 0) 38%),
+    linear-gradient(20deg, rgba(var(--accent-c), .13) 0%, rgba(var(--accent-c), 0) 40%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .032) 0 1px, transparent 1px 56px),
+    linear-gradient(135deg, var(--bg-a) 0%, var(--bg-b) 54%, var(--bg-c) 100%) !important;
+  background-size: 150% 150%, 160% 160%, 145% 145%, auto, 100% 100%;
+  animation: section-atmosphere 24s ease-in-out infinite alternate;
+}
+
+#skills {
+  --bg-a: #111015;
+  --bg-b: #1c1b18;
+  --bg-c: #251711;
+  --accent-a: 68, 222, 170;
+  --accent-b: 255, 143, 77;
+  --accent-c: 109, 205, 233;
+}
+
+#education {
+  --bg-a: #11140f;
+  --bg-b: #202719;
+  --bg-c: #141513;
+  --accent-a: 198, 235, 112;
+  --accent-b: 255, 194, 92;
+  --accent-c: 96, 184, 224;
+}
+
+#projects {
+  --bg-a: #141010;
+  --bg-b: #211b1f;
+  --bg-c: #10201c;
+  --accent-a: 255, 95, 120;
+  --accent-b: 53, 218, 195;
+  --accent-c: 255, 205, 112;
+}
+
+#experience {
+  --bg-a: #12100e;
+  --bg-b: #271a14;
+  --bg-c: #152018;
+  --accent-a: 232, 118, 70;
+  --accent-b: 105, 219, 156;
+  --accent-c: 225, 198, 122;
+}
+
+#research {
+  --bg-a: #0f1411;
+  --bg-b: #18261e;
+  --bg-c: #101515;
+  --accent-a: 63, 224, 169;
+  --accent-b: 118, 225, 243;
+  --accent-c: 247, 190, 92;
+}
+
+#certifications {
+  --bg-a: #12120e;
+  --bg-b: #262410;
+  --bg-c: #101916;
+  --accent-a: 255, 207, 87;
+  --accent-b: 80, 216, 160;
+  --accent-c: 244, 116, 85;
+}
+
+#contact {
+  --bg-a: #130f12;
+  --bg-b: #21181e;
+  --bg-c: #10201d;
+  --accent-a: 253, 114, 136;
+  --accent-b: 68, 218, 191;
+  --accent-c: 255, 198, 103;
+}
+
+#about::before, #skills::before, #education::before, #projects::before,
+#experience::before, #research::before, #certifications::before, #contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .42;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px),
+    linear-gradient(112deg, transparent 0 42%, rgba(var(--accent-a), .14) 48%, transparent 56%);
+  background-size: 46px 46px, 46px 46px, 260% 100%;
+  mask-image: linear-gradient(180deg, transparent 0%, black 14%, black 86%, transparent 100%);
+  animation: texture-drift 26s linear infinite;
+}
+
+#about::after, #skills::after, #education::after, #projects::after,
+#experience::after, #research::after, #certifications::after, #contact::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: auto !important;
+  height: auto !important;
+  right: auto !important;
+  top: auto !important;
+  pointer-events: none;
+  opacity: .72;
+  background:
+    linear-gradient(118deg, transparent 0 30%, rgba(var(--accent-c), .13) 42%, transparent 56%),
+    linear-gradient(252deg, transparent 0 47%, rgba(var(--accent-a), .11) 56%, transparent 70%);
+  background-size: 220% 100%, 180% 100%;
+  animation: light-rake 18s var(--aesthetic-ease) infinite alternate;
+}
+
+#about .container, #skills .container, #education .container, #projects .container,
+#experience .container, #research .container, #certifications .container, #contact .container {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes section-atmosphere {
+  0% { background-position: 0% 0%, 100% 0%, 0% 100%, 0 0, 0 0; }
+  100% { background-position: 100% 22%, 0% 72%, 92% 0%, 22px 18px, 0 0; }
+}
+
+@keyframes texture-drift {
+  0% { background-position: 0 0, 0 0, 0% 50%; }
+  100% { background-position: 46px 46px, -46px 46px, 100% 50%; }
+}
+
+@keyframes light-rake {
+  0% { background-position: 0% 50%, 100% 50%; }
+  100% { background-position: 100% 50%, 0% 50%; }
+}
+
+/* Sharper headings and professional section rhythm */
+#about .section-heading h2, #skills .section-heading h2, #education .section-heading h2,
+#projects .section-heading h2, #experience .section-heading h2, #research .section-heading h2,
+#certifications .section-heading h2, #contact .section-heading h2 {
+  letter-spacing: 0 !important;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(var(--accent-a), 1) 46%, rgba(var(--accent-b), .98) 88%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: 0 18px 48px rgba(0, 0, 0, .22) !important;
+}
+
+#about .section-heading h2::after, #skills .section-heading h2::after,
+#education .section-heading h2::after, #projects .section-heading h2::after,
+#experience .section-heading h2::after, #research .section-heading h2::after,
+#certifications .section-heading h2::after, #contact .section-heading h2::after {
+  height: 3px !important;
+  background: linear-gradient(90deg, rgba(var(--accent-a), 1), rgba(var(--accent-b), 1), rgba(var(--accent-c), 1)) !important;
+  box-shadow: 0 0 26px rgba(var(--accent-a), .35);
+}
+
+#about .section-heading p, #skills .section-heading p, #education .section-heading p,
+#projects .section-heading p, #experience .section-heading p, #research .section-heading p,
+#certifications .section-heading p, #contact .section-heading p {
+  color: var(--text-soft) !important;
+  font-weight: 700;
+}
+
+#about .eyebrow, #skills .eyebrow, #education .eyebrow, #projects .eyebrow,
+#experience .eyebrow, #research .eyebrow, #certifications .eyebrow, #contact .eyebrow,
+#about .card-label, #projects .project-type, #certifications .cert-badge {
+  color: var(--text-main) !important;
+  border-color: rgba(var(--accent-a), .38) !important;
+  background:
+    linear-gradient(135deg, rgba(var(--accent-a), .19), rgba(var(--accent-b), .12)) !important;
+  box-shadow: 0 16px 36px -28px rgba(var(--accent-a), .9) !important;
+}
+
+/* Refined glass panels */
+#about .about-card, #about .mini-card, #skills .skill-card, #education .education-card,
+#projects .project-card, #experience .experience-item, #research .research-card,
+#certifications .cert-info-card, #certifications .cert-image-card,
+#contact .contact-info-panel, #contact .contact-form {
+  border-radius: .8rem !important;
+  color: var(--text-main) !important;
+  background:
+    linear-gradient(150deg, var(--panel-strong), rgba(255, 255, 255, .052) 58%, rgba(255, 255, 255, .086)) !important;
+  border: 1px solid var(--panel-line) !important;
+  box-shadow:
+    0 30px 90px -56px rgba(0, 0, 0, .95),
+    inset 0 1px 0 rgba(255, 255, 255, .13) !important;
+  backdrop-filter: blur(16px) saturate(130%);
+}
+
+#about .about-card:hover, #about .mini-card:hover, #skills .skill-card:hover,
+#education .education-card:hover, #projects .project-card:hover,
+#experience .experience-item:hover, #research .research-card:hover,
+#certifications .cert-info-card:hover, #certifications .cert-image-card:hover,
+#contact .contact-info-panel:hover, #contact .contact-form:hover {
+  transform: translateY(-9px);
+  border-color: rgba(var(--accent-a), .6) !important;
+  box-shadow:
+    0 36px 96px -50px rgba(var(--accent-a), .42),
+    0 0 0 1px rgba(var(--accent-b), .16),
+    inset 0 1px 0 rgba(255, 255, 255, .18) !important;
+}
+
+#about .mini-card::before, #skills .skill-card::before, #projects .project-card::before,
+#education .education-card::before, #research .research-card::before {
+  background: linear-gradient(120deg,
+    rgba(var(--accent-a), 0),
+    rgba(var(--accent-a), .86),
+    rgba(var(--accent-b), .72),
+    rgba(var(--accent-c), .62),
+    rgba(var(--accent-a), 0)) !important;
+  background-size: 280% 100% !important;
+  opacity: .28 !important;
+  animation: border-glide 7s linear infinite;
+}
+
+#about .mini-card:hover::before, #skills .skill-card:hover::before,
+#projects .project-card:hover::before, #education .education-card:hover::before,
+#research .research-card:hover::before {
+  opacity: .9 !important;
+}
+
+@keyframes border-glide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 280% 50%; }
+}
+
+#about .mini-card::after, #skills .skill-card::after, #projects .project-card::after,
+#research .research-card::after, #education .education-card::after, #certifications .cert-info-card::after {
+  background:
+    radial-gradient(360px circle at var(--mx) var(--my), rgba(var(--accent-a), .22), transparent 56%),
+    linear-gradient(135deg, transparent, rgba(var(--accent-b), .08)) !important;
+}
+
+/* Text and icon treatment */
+#about .main-about-card h3, #about .mini-card h4, #skills .skill-top h3,
+#education .education-content h3, #projects .project-card h3,
+#experience .experience-content h3, #research .research-card h3,
+#certifications .cert-info-card h3, #contact .contact-info-panel h3 {
+  color: var(--text-main) !important;
+  letter-spacing: 0 !important;
+}
+
+#about .main-about-card p, #about .mini-card p, #education .education-content p,
+#projects .project-card p, #experience .experience-content p, #research .research-card p,
+#certifications .cert-info-card p, #contact .contact-info-panel > p {
+  color: var(--text-soft) !important;
+}
+
+#education .education-content h4, #experience .experience-content span,
+#research .authors, #skills .skill-top strong {
+  color: rgb(var(--accent-b)) !important;
+}
+
+#about .mini-card i, #skills .skill-top i, #education .education-icon,
+#experience .experience-marker, #certifications .cert-icon, #contact .contact-row i {
+  border-radius: .8rem !important;
+  color: #07110d !important;
+  background: linear-gradient(135deg, rgba(var(--accent-a), 1), rgba(var(--accent-b), .95)) !important;
+  box-shadow:
+    0 18px 38px -24px rgba(var(--accent-a), .9),
+    inset 0 1px 0 rgba(255, 255, 255, .35) !important;
+  animation: icon-breathe 5.8s ease-in-out infinite;
+}
+
+@keyframes icon-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+#about .about-points span, #skills .skill-tags span, #projects .project-tech span,
+#research .research-meta span, #certifications .cert-details li,
+#education .education-tags span {
+  color: var(--text-main) !important;
+  background: rgba(255, 255, 255, .082) !important;
+  border: 1px solid rgba(var(--accent-a), .26) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+#about .about-points i, #research .research-meta i, #certifications .cert-details i {
+  color: rgb(var(--accent-a)) !important;
+}
+
+#skills .skill-bar {
+  height: 1rem !important;
+  background: rgba(255, 255, 255, .12) !important;
+}
+
+#skills .skill-bar span {
+  background: linear-gradient(90deg, rgba(var(--accent-a), 1), rgba(var(--accent-b), 1), rgba(var(--accent-c), 1)) !important;
+  box-shadow: 0 0 24px rgba(var(--accent-a), .38) !important;
+}
+
+#skills .skill-tags span:hover, #projects .project-tech span:hover {
+  color: #07110d !important;
+  background: linear-gradient(135deg, rgba(var(--accent-a), 1), rgba(var(--accent-b), .95)) !important;
+}
+
+/* Project cards: stronger image stage and cleaner actions */
+#projects .project-card {
+  overflow: hidden !important;
+}
+
+#projects .project-cover {
+  height: 24.5rem !important;
+  border-radius: .8rem .8rem 0 0 !important;
+  background:
+    linear-gradient(135deg, rgba(var(--accent-a), .16), rgba(var(--accent-b), .14)) !important;
+}
+
+#projects .project-cover::after {
+  background:
+    linear-gradient(180deg, transparent 34%, rgba(7, 11, 13, .30) 56%, rgba(7, 11, 13, .92) 100%),
+    linear-gradient(115deg, rgba(var(--accent-a), .18), transparent 42%) !important;
+}
+
+#projects .project-cover > span {
+  border-radius: .8rem !important;
+  color: #08110d !important;
+  background: linear-gradient(135deg, rgba(var(--accent-a), 1), rgba(var(--accent-b), 1)) !important;
+  box-shadow: 0 24px 42px -24px rgba(var(--accent-a), .9) !important;
+}
+
+#projects .project-cover--placeholder {
+  background:
+    linear-gradient(135deg, rgba(var(--accent-a), .24), transparent 42%),
+    linear-gradient(245deg, rgba(var(--accent-b), .24), transparent 46%),
+    linear-gradient(135deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c)) !important;
+}
+
+#projects .project-links a {
+  border-radius: .8rem !important;
+  letter-spacing: 0 !important;
+}
+
+#projects .project-links a:first-child, #contact .contact-form button, .pm-btn {
+  color: #07110d !important;
+  background: linear-gradient(135deg, rgba(var(--accent-a), 1), rgba(var(--accent-b), 1)) !important;
+  box-shadow: 0 20px 42px -26px rgba(var(--accent-a), .92) !important;
+}
+
+#projects .project-links a:last-child {
+  color: var(--text-main) !important;
+  background: rgba(255, 255, 255, .075) !important;
+  border: 1px solid rgba(var(--accent-a), .27) !important;
+}
+
+/* Education and certificate image polish */
+#education .education-icon.education-logo {
+  background: rgba(255, 255, 255, .96) !important;
+  border-radius: .8rem !important;
+}
+
+#certifications .cert-image-card img {
+  border-radius: .8rem !important;
+  border-color: rgba(var(--accent-a), .34) !important;
+}
+
+/* Contact surface */
+#contact .contact-row {
+  color: var(--text-main) !important;
+}
+
+#contact .contact-form input, #contact .contact-form textarea {
+  border-radius: .8rem !important;
+  color: var(--text-main) !important;
+  background: rgba(255, 255, 255, .075) !important;
+  border: 1px solid rgba(var(--accent-a), .28) !important;
+}
+
+#contact .contact-form input::placeholder, #contact .contact-form textarea::placeholder {
+  color: rgba(248, 251, 248, .64) !important;
+}
+
+#contact .contact-form input:focus, #contact .contact-form textarea:focus {
+  border-color: rgba(var(--accent-a), .78) !important;
+  box-shadow: 0 0 0 4px rgba(var(--accent-a), .15), 0 20px 40px -28px rgba(var(--accent-a), .9) !important;
+}
+
+/* Project modal: keep it highly readable while matching the new palette */
+.project-modal__dialog {
+  border-radius: .8rem !important;
+  overflow: hidden !important;
+}
+
+.project-modal__gallery {
+  border-radius: .8rem .8rem 0 0 !important;
+}
+
+.project-modal__body {
+  background:
+    linear-gradient(135deg, rgba(53, 218, 195, .10), transparent 36%),
+    linear-gradient(245deg, rgba(255, 205, 112, .12), transparent 42%),
+    #fbfcf8 !important;
+}
+
+#pmTitle {
+  color: #111a18 !important;
+  -webkit-text-fill-color: #111a18 !important;
+}
+
+#pmDesc, .pm-list li {
+  color: #33433e !important;
+}
+
+#pmType, .project-modal__body .eyebrow,
+.project-modal .project-tech span, #pmTech span {
+  color: #14231f !important;
+  border-color: rgba(39, 166, 145, .28) !important;
+  background: linear-gradient(135deg, rgba(53, 218, 195, .16), rgba(255, 205, 112, .16)) !important;
+}
+
+/* Footer follows the improved visual system without changing Home */
+.professional-footer {
+  background:
+    linear-gradient(112deg, rgba(53, 218, 195, .16), transparent 34%),
+    linear-gradient(248deg, rgba(255, 194, 92, .14), transparent 36%),
+    #0f1411 !important;
+}
+
+.footer-contact a {
+  border-radius: .8rem !important;
+  border-color: rgba(53, 218, 195, .28) !important;
+}
+
+/* More premium entrance motion for existing reveal hooks */
+[data-reveal], [data-stagger] > * {
+  filter: blur(10px);
+  transform: translateY(34px) scale(.985);
+}
+
+[data-reveal].in-view, [data-stagger].in-view > * {
+  filter: blur(0);
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  #about, #skills, #education, #projects,
+  #experience, #research, #certifications, #contact {
+    background-size: 190% 190%, 200% 200%, 180% 180%, auto, 100% 100%;
+  }
+
+  #projects .project-cover {
+    height: 20rem !important;
+  }
+
+  #about .about-card, #about .mini-card, #skills .skill-card, #education .education-card,
+  #projects .project-card, #experience .experience-item, #research .research-card,
+  #certifications .cert-info-card, #certifications .cert-image-card,
+  #contact .contact-info-panel, #contact .contact-form {
+    backdrop-filter: blur(10px) saturate(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #about, #skills, #education, #projects,
+  #experience, #research, #certifications, #contact,
+  #about::before, #skills::before, #education::before, #projects::before,
+  #experience::before, #research::before, #certifications::before, #contact::before,
+  #about::after, #skills::after, #education::after, #projects::after,
+  #experience::after, #research::after, #certifications::after, #contact::after,
+  #about .mini-card::before, #skills .skill-card::before, #projects .project-card::before,
+  #education .education-card::before, #research .research-card::before,
+  #about .mini-card i, #skills .skill-top i, #education .education-icon,
+  #experience .experience-marker, #certifications .cert-icon, #contact .contact-row i {
+    animation: none !important;
+  }
+
+  [data-reveal], [data-stagger] > * {
+    filter: none !important;
+  }
+}
+
+/* ============================================================
+   PROJECT MODAL REPAIR
+   Keeps the new aesthetic sections, but makes project details
+   clear, readable, and easy to close.
+   ============================================================ */
+.project-modal {
+  z-index: 20000 !important;
+  padding: clamp(1rem, 2.2vw, 2.8rem) !important;
+}
+
+.project-modal.is-open {
+  display: flex !important;
+}
+
+.project-modal__backdrop {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(53, 218, 195, .22), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgba(255, 205, 112, .18), transparent 32%),
+    rgba(5, 10, 12, .82) !important;
+  backdrop-filter: blur(12px) saturate(120%) !important;
+}
+
+.project-modal__dialog {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(36rem, .92fr) !important;
+  width: min(1220px, 96vw) !important;
+  max-height: min(88vh, 820px) !important;
+  overflow: hidden !important;
+  border-radius: 1rem !important;
+  background: #f7fbf6 !important;
+  border: 1px solid rgba(208, 226, 218, .95) !important;
+  box-shadow:
+    0 42px 110px rgba(0, 0, 0, .48),
+    0 0 0 1px rgba(255, 255, 255, .55) inset !important;
+}
+
+.project-modal__close {
+  position: fixed !important;
+  top: max(1.6rem, env(safe-area-inset-top)) !important;
+  right: max(1.6rem, env(safe-area-inset-right)) !important;
+  z-index: 21000 !important;
+  width: 5.2rem !important;
+  height: 5.2rem !important;
+  border-radius: 50% !important;
+  border: 2px solid rgba(255, 255, 255, .86) !important;
+  background: #ffffff !important;
+  color: #111a18 !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 2.4rem !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, .35),
+    0 0 0 6px rgba(5, 10, 12, .18) !important;
+}
+
+.project-modal__close i {
+  display: block !important;
+  color: inherit !important;
+  font-size: 2.4rem !important;
+}
+
+.project-modal__close:hover,
+.project-modal__close:focus-visible {
+  background: #101816 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) rotate(90deg) !important;
+  outline: none !important;
+}
+
+.project-modal__gallery {
+  min-height: 100% !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(135deg, rgba(14, 23, 20, .96), rgba(29, 47, 40, .98)) !important;
+}
+
+.project-modal__gallery img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 48rem !important;
+  object-fit: contain !important;
+  background: #0d1513 !important;
+}
+
+.gallery-arrow {
+  z-index: 5 !important;
+  width: 4.8rem !important;
+  height: 4.8rem !important;
+  border: 1px solid rgba(255, 255, 255, .78) !important;
+  background: rgba(255, 255, 255, .96) !important;
+  color: #111a18 !important;
+}
+
+.gallery-arrow:hover {
+  background: #111a18 !important;
+  color: #ffffff !important;
+}
+
+.gallery-dots {
+  z-index: 5 !important;
+  padding: .75rem 1rem !important;
+  border-radius: 999rem !important;
+  background: rgba(0, 0, 0, .34) !important;
+  backdrop-filter: blur(8px);
+}
+
+.project-modal__body {
+  overflow-y: auto !important;
+  padding: clamp(2.8rem, 3.6vw, 4.8rem) !important;
+  color: #12201c !important;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(53, 218, 195, .14), transparent 34%),
+    radial-gradient(circle at 100% 0%, rgba(255, 205, 112, .13), transparent 36%),
+    linear-gradient(180deg, #ffffff 0%, #f2f7f3 100%) !important;
+}
+
+#pmType,
+.project-modal__body .eyebrow {
+  color: #16352d !important;
+  -webkit-text-fill-color: #16352d !important;
+  background: rgba(38, 181, 153, .12) !important;
+  border: 1px solid rgba(38, 181, 153, .30) !important;
+  box-shadow: none !important;
+}
+
+#pmTitle,
+.project-modal__body h3 {
+  margin: 1.7rem 0 1.4rem !important;
+  color: #101816 !important;
+  -webkit-text-fill-color: #101816 !important;
+  background: none !important;
+  text-shadow: none !important;
+}
+
+#pmDesc,
+.project-modal__body p {
+  color: #2c3f39 !important;
+  -webkit-text-fill-color: #2c3f39 !important;
+  font-size: clamp(1.55rem, 1.35vw, 1.78rem) !important;
+  line-height: 1.82 !important;
+  font-weight: 650 !important;
+}
+
+.pm-section {
+  margin-top: 2.8rem !important;
+  padding-top: 2.2rem !important;
+  border-top: 1px solid rgba(38, 181, 153, .18) !important;
+}
+
+.pm-section h4 {
+  color: #145f51 !important;
+  -webkit-text-fill-color: #145f51 !important;
+  font-size: 1.3rem !important;
+  font-weight: 900 !important;
+}
+
+.pm-list {
+  gap: 1rem !important;
+}
+
+.pm-list li {
+  color: #263a34 !important;
+  -webkit-text-fill-color: #263a34 !important;
+  font-size: clamp(1.42rem, 1.2vw, 1.62rem) !important;
+  line-height: 1.72 !important;
+  font-weight: 700 !important;
+}
+
+.pm-list li::before {
+  color: #12977f !important;
+}
+
+.project-modal .project-tech,
+#pmTech {
+  margin-bottom: 0 !important;
+}
+
+.project-modal .project-tech span,
+#pmTech span {
+  color: #15322c !important;
+  -webkit-text-fill-color: #15322c !important;
+  background: #eaf7f2 !important;
+  border: 1px solid rgba(38, 181, 153, .26) !important;
+  box-shadow: none !important;
+}
+
+.pm-btn,
+#pmGithub {
+  color: #0b1411 !important;
+  -webkit-text-fill-color: #0b1411 !important;
+  background: linear-gradient(135deg, #35dac3, #f2c261) !important;
+  border-radius: .8rem !important;
+  box-shadow: 0 18px 36px -24px rgba(18, 151, 127, .95) !important;
+}
+
+.pm-btn i,
+#pmGithub i {
+  color: inherit !important;
+}
+
+@media (max-width: 900px) {
+  .project-modal {
+    padding: 1.2rem !important;
+  }
+
+  .project-modal__dialog {
+    display: block !important;
+    width: min(96vw, 720px) !important;
+    max-height: 88vh !important;
+    overflow-y: auto !important;
+  }
+
+  .project-modal__gallery img {
+    height: auto !important;
+    min-height: 24rem !important;
+    max-height: 42vh !important;
+  }
+
+  .project-modal__body {
+    overflow: visible !important;
+  }
+
+  .project-modal__close {
+    width: 4.8rem !important;
+    height: 4.8rem !important;
+    top: 1rem !important;
+    right: 1rem !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .project-modal__body {
+    padding: 2.4rem 1.8rem 2.8rem !important;
+  }
+
+  #pmTitle,
+  .project-modal__body h3 {
+    font-size: 2.35rem !important;
+  }
+}
+
+/* ============================================================
+   PROJECT MODAL CLOSE HOTFIX
+   The close button must be visible on every viewport and cannot
+   depend on icon-font rendering.
+   ============================================================ */
+.project-modal__dialog {
+  overflow: auto !important;
+}
+
+.project-modal__close {
+  position: absolute !important;
+  top: 1.4rem !important;
+  right: 1.4rem !important;
+  z-index: 2147483000 !important;
+  width: 5.4rem !important;
+  height: 5.4rem !important;
+  min-width: 5.4rem !important;
+  min-height: 5.4rem !important;
+  border: 3px solid #ffffff !important;
+  border-radius: 50% !important;
+  background: #ffb000 !important;
+  color: #101816 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, .45),
+    0 0 0 5px rgba(0, 0, 0, .20) !important;
+}
+
+.project-modal__close i {
+  display: none !important;
+}
+
+.project-modal__close-fallback {
+  display: block !important;
+  color: #101816 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 2.4rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.project-modal__close:hover,
+.project-modal__close:focus-visible {
+  background: #101816 !important;
+  color: #ffffff !important;
+  border-color: #ffb000 !important;
+  transform: scale(1.06) !important;
+}
+
+.project-modal__close:hover .project-modal__close-fallback,
+.project-modal__close:focus-visible .project-modal__close-fallback {
+  color: #ffffff !important;
+}
+
+.pm-close-inline {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 12 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .8rem !important;
+  width: max-content !important;
+  margin: 0 0 1.8rem auto !important;
+  padding: 1rem 1.45rem !important;
+  border: 2px solid rgba(16, 24, 22, .12) !important;
+  border-radius: 999rem !important;
+  background: #101816 !important;
+  color: #ffffff !important;
+  font-family: inherit !important;
+  font-size: 1.35rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  cursor: pointer !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .16) !important;
+}
+
+.pm-close-inline span:first-child {
+  display: grid !important;
+  place-items: center !important;
+  width: 2.4rem !important;
+  height: 2.4rem !important;
+  border-radius: 50% !important;
+  background: #ffb000 !important;
+  color: #101816 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 1.35rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.pm-close-inline:hover,
+.pm-close-inline:focus-visible {
+  background: #0b1110 !important;
+  transform: translateY(-1px) !important;
+  outline: none !important;
+}
+
+@media (max-width: 900px) {
+  .project-modal__close {
+    top: 1rem !important;
+    right: 1rem !important;
+    width: 5rem !important;
+    height: 5rem !important;
+    min-width: 5rem !important;
+    min-height: 5rem !important;
+  }
+}
+
+/* Modal layer isolation: prevents Home/nav from overlapping project details. */
+html.modal-open,
+body.modal-open {
+  overflow: hidden !important;
+}
+
+body.modal-open .site-header {
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+body > .project-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147482000 !important;
+  overflow: auto !important;
+}
+
+body > .project-modal.is-open {
+  display: flex !important;
+}
+
+body > .project-modal .project-modal__backdrop {
+  z-index: 0 !important;
+}
+
+body > .project-modal .project-modal__dialog {
+  position: relative !important;
+  z-index: 2 !important;
+}
