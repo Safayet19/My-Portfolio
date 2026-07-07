@@ -12,6 +12,49 @@
       const sec = document.getElementById(id);
       if (!sec) return;
 
+      if (!sec.querySelector(":scope > .night-bg")) {
+        const bg = document.createElement("div");
+        bg.className = "night-bg";
+        bg.setAttribute("aria-hidden", "true");
+
+        const aurora = document.createElement("span");
+        aurora.className = "night-bg__aurora";
+
+        const waves = document.createElement("span");
+        waves.className = "night-bg__waves";
+
+        const shooting = document.createElement("span");
+        shooting.className = "night-bg__shooting";
+
+        const stars = document.createElement("span");
+        stars.className = "night-bg__stars";
+
+        const sectionIndex = sections.indexOf(id);
+        for (let i = 0; i < 44; i += 1) {
+          const star = document.createElement("span");
+          star.className = "night-star";
+
+          const x = (7 + i * 19 + sectionIndex * 11) % 96;
+          const y = (8 + i * 13 + sectionIndex * 17) % 82;
+          const size = 1.4 + ((i + sectionIndex) % 5) * 0.55;
+          const delay = -1 * (((i * 0.37) + sectionIndex * 0.61) % 6);
+          const duration = 2.2 + ((i + sectionIndex) % 7) * 0.42;
+          const glow = 0.45 + ((i + 2) % 4) * 0.13;
+
+          star.style.setProperty("--x", `${x}%`);
+          star.style.setProperty("--y", `${y}%`);
+          star.style.setProperty("--s", `${size}px`);
+          star.style.setProperty("--d", `${delay}s`);
+          star.style.setProperty("--dur", `${duration}s`);
+          star.style.setProperty("--glow", glow.toFixed(2));
+
+          stars.appendChild(star);
+        }
+
+        bg.append(aurora, waves, shooting, stars);
+        sec.prepend(bg);
+      }
+
       const heading = sec.querySelector(".section-heading");
       if (heading && !heading.hasAttribute("data-reveal")) heading.setAttribute("data-reveal", "up");
 

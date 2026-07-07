@@ -2393,3 +2393,692 @@ body > .project-modal {
     animation: none !important;
   }
 }
+
+/* ============================================================
+   GRAPHITE GOLD NIGHT THEME
+   Final theme layer: premium dark sky, gold/cyan accents,
+   subtle star blink and wave motion. Template stays unchanged.
+   ============================================================ */
+:root {
+  --night-ink: #060a12;
+  --night-ink-2: #0a101c;
+  --night-panel: rgba(13, 24, 38, .82);
+  --night-panel-strong: rgba(17, 31, 48, .92);
+  --night-line: rgba(245, 205, 123, .18);
+  --night-line-cyan: rgba(49, 222, 246, .22);
+  --night-gold: #f3c86b;
+  --night-gold-2: #ffe7a3;
+  --night-cyan: #2fdcf4;
+  --night-ice: #eff7ff;
+  --night-soft: #aebccc;
+  --night-muted: #7f8fa3;
+}
+
+body {
+  background: var(--night-ink) !important;
+}
+
+.site-header {
+  background:
+    linear-gradient(135deg, rgba(6, 10, 18, .92), rgba(10, 20, 34, .84)) !important;
+  border-bottom: 1px solid rgba(47, 220, 244, .16) !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .26) !important;
+  backdrop-filter: blur(18px) saturate(130%) !important;
+}
+
+.logo-brand span,
+.navbar a {
+  color: #eef6ff !important;
+  -webkit-text-fill-color: #eef6ff !important;
+}
+
+.navbar a.active,
+.navbar a:hover {
+  color: var(--night-cyan) !important;
+  -webkit-text-fill-color: var(--night-cyan) !important;
+}
+
+.menu-toggle {
+  color: var(--night-ice) !important;
+}
+
+#about, #skills, #education, #projects,
+#experience, #research, #certifications, #contact {
+  --bg-a: #060a12;
+  --bg-b: #0a1422;
+  --bg-c: #101928;
+  --accent-a: 243, 200, 107;
+  --accent-b: 47, 220, 244;
+  --accent-c: 132, 103, 255;
+  --panel: var(--night-panel);
+  --panel-strong: var(--night-panel-strong);
+  --panel-line: var(--night-line);
+  --text-main: var(--night-ice);
+  --text-soft: var(--night-soft);
+  --text-dim: var(--night-muted);
+  isolation: isolate !important;
+  color: var(--night-ice) !important;
+  background:
+    radial-gradient(circle at 17% 12%, rgba(47, 220, 244, .17), transparent 28%),
+    radial-gradient(circle at 84% 15%, rgba(243, 200, 107, .15), transparent 30%),
+    radial-gradient(circle at 64% 72%, rgba(132, 103, 255, .12), transparent 34%),
+    linear-gradient(135deg, #050912 0%, #081321 44%, #111722 100%) !important;
+  background-size: 145% 145%, 150% 150%, 160% 160%, 100% 100% !important;
+  animation: night-drift 22s ease-in-out infinite alternate !important;
+}
+
+#skills {
+  --accent-a: 47, 220, 244;
+  --accent-b: 243, 200, 107;
+  --accent-c: 117, 139, 255;
+}
+
+#education {
+  --accent-a: 243, 200, 107;
+  --accent-b: 96, 221, 180;
+  --accent-c: 47, 220, 244;
+}
+
+#projects {
+  --accent-a: 243, 200, 107;
+  --accent-b: 47, 220, 244;
+  --accent-c: 255, 117, 143;
+}
+
+#experience {
+  --accent-a: 96, 221, 180;
+  --accent-b: 243, 200, 107;
+  --accent-c: 47, 220, 244;
+}
+
+#research {
+  --accent-a: 47, 220, 244;
+  --accent-b: 243, 200, 107;
+  --accent-c: 132, 103, 255;
+}
+
+#certifications {
+  --accent-a: 243, 200, 107;
+  --accent-b: 255, 150, 92;
+  --accent-c: 47, 220, 244;
+}
+
+#contact {
+  --accent-a: 47, 220, 244;
+  --accent-b: 243, 200, 107;
+  --accent-c: 96, 221, 180;
+}
+
+#about::before, #skills::before, #education::before, #projects::before,
+#experience::before, #research::before, #certifications::before, #contact::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: .74 !important;
+  mix-blend-mode: screen !important;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.94) 0 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(47,220,244,.62) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(243,200,107,.58) 0 1px, transparent 2px),
+    linear-gradient(rgba(47,220,244,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243,200,107,.035) 1px, transparent 1px) !important;
+  background-size: 110px 110px, 170px 170px, 230px 230px, 56px 56px, 56px 56px !important;
+  background-position: 8px 14px, 70px 36px, 130px 86px, 0 0, 0 0 !important;
+  animation: star-blink 5.6s ease-in-out infinite alternate !important;
+}
+
+#about::after, #skills::after, #education::after, #projects::after,
+#experience::after, #research::after, #certifications::after, #contact::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: .82 !important;
+  mix-blend-mode: screen !important;
+  background:
+    radial-gradient(900px 280px at 15% 104%, rgba(47,220,244,.16), transparent 72%),
+    radial-gradient(760px 260px at 88% 102%, rgba(243,200,107,.12), transparent 72%),
+    repeating-radial-gradient(ellipse at 50% 116%, rgba(47,220,244,.12) 0 1px, transparent 2px 17px),
+    linear-gradient(118deg, transparent 0 38%, rgba(255,255,255,.055) 48%, transparent 60%) !important;
+  background-size: auto, auto, 100% 240px, 240% 100% !important;
+  background-position: center, center, 0 100%, 0% 0 !important;
+  animation: night-wave 14s ease-in-out infinite alternate !important;
+}
+
+#about .container, #skills .container, #education .container, #projects .container,
+#experience .container, #research .container, #certifications .container, #contact .container {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+#about .section-heading h2, #skills .section-heading h2, #education .section-heading h2,
+#projects .section-heading h2, #experience .section-heading h2, #research .section-heading h2,
+#certifications .section-heading h2, #contact .section-heading h2 {
+  color: var(--night-ice) !important;
+  -webkit-text-fill-color: transparent !important;
+  background: linear-gradient(90deg, #ffffff 0%, var(--night-gold-2) 38%, var(--night-cyan) 78%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  text-shadow: 0 0 28px rgba(47, 220, 244, .12) !important;
+}
+
+#about .section-heading h2::after, #skills .section-heading h2::after,
+#education .section-heading h2::after, #projects .section-heading h2::after,
+#experience .section-heading h2::after, #research .section-heading h2::after,
+#certifications .section-heading h2::after, #contact .section-heading h2::after {
+  background: linear-gradient(90deg, var(--night-gold), var(--night-cyan), rgba(var(--accent-c), 1)) !important;
+  box-shadow:
+    0 0 26px rgba(47, 220, 244, .35),
+    0 0 22px rgba(243, 200, 107, .22) !important;
+}
+
+#about .section-heading p, #skills .section-heading p, #education .section-heading p,
+#projects .section-heading p, #experience .section-heading p, #research .section-heading p,
+#certifications .section-heading p, #contact .section-heading p {
+  color: var(--night-soft) !important;
+  -webkit-text-fill-color: var(--night-soft) !important;
+  text-shadow: none !important;
+}
+
+#about .eyebrow, #skills .eyebrow, #education .eyebrow, #projects .eyebrow,
+#experience .eyebrow, #research .eyebrow, #certifications .eyebrow, #contact .eyebrow,
+#about .card-label, #projects .project-type, #certifications .cert-badge {
+  color: var(--night-gold-2) !important;
+  -webkit-text-fill-color: var(--night-gold-2) !important;
+  border-color: rgba(243, 200, 107, .28) !important;
+  background:
+    linear-gradient(135deg, rgba(243,200,107,.12), rgba(47,220,244,.09)),
+    rgba(8, 18, 31, .74) !important;
+  box-shadow:
+    0 18px 44px -32px rgba(47, 220, 244, .85),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+  backdrop-filter: blur(16px) saturate(130%) !important;
+}
+
+#about .about-card, #about .mini-card, #skills .skill-card, #education .education-card,
+#projects .project-card, #experience .experience-item, #research .research-card,
+#certifications .cert-card, #contact .contact-info-panel, #contact .contact-form,
+.professional-footer {
+  color: var(--night-ice) !important;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(47,220,244,.13), transparent 34%),
+    radial-gradient(circle at 90% 10%, rgba(243,200,107,.11), transparent 30%),
+    linear-gradient(145deg, rgba(12, 24, 39, .9), rgba(8, 15, 26, .84) 58%, rgba(17, 26, 38, .9)) !important;
+  border: 1px solid rgba(243, 200, 107, .16) !important;
+  box-shadow:
+    0 34px 86px -54px rgba(0, 0, 0, .95),
+    0 0 0 1px rgba(47, 220, 244, .08) inset,
+    0 1px 0 rgba(255,255,255,.06) inset !important;
+  backdrop-filter: blur(18px) saturate(122%) !important;
+}
+
+#about .about-card:hover, #about .mini-card:hover, #skills .skill-card:hover,
+#education .education-card:hover, #projects .project-card:hover,
+#experience .experience-item:hover, #research .research-card:hover,
+#certifications .cert-card:hover, #contact .contact-info-panel:hover, #contact .contact-form:hover {
+  border-color: rgba(47, 220, 244, .35) !important;
+  box-shadow:
+    0 40px 104px -58px rgba(0, 0, 0, .98),
+    0 24px 70px -52px rgba(47, 220, 244, .62),
+    0 0 0 1px rgba(243, 200, 107, .13) inset,
+    0 1px 0 rgba(255,255,255,.08) inset !important;
+}
+
+#about .mini-card::before, #skills .skill-card::before, #projects .project-card::before,
+#education .education-card::before, #research .research-card::before, #certifications .cert-card::before {
+  opacity: .9 !important;
+  background: linear-gradient(120deg,
+    transparent,
+    rgba(243,200,107,.84),
+    rgba(47,220,244,.72),
+    rgba(var(--accent-c), .54),
+    transparent) !important;
+  background-size: 280% 100% !important;
+}
+
+#about .mini-card::after, #skills .skill-card::after, #projects .project-card::after,
+#research .research-card::after, #certifications .cert-card::after {
+  background:
+    radial-gradient(380px circle at var(--mx) var(--my), rgba(47,220,244,.18), transparent 58%),
+    linear-gradient(135deg, transparent, rgba(243,200,107,.06)) !important;
+}
+
+#about .main-about-card h3, #about .mini-card h4, #skills .skill-top h3,
+#education .education-content h3, #projects .project-card h3,
+#experience .experience-content h3, #research .research-card h3,
+#certifications .cert-content h3, #contact .contact-info-panel h3, #contact .contact-form h3 {
+  color: #f7fbff !important;
+  -webkit-text-fill-color: #f7fbff !important;
+  text-shadow: 0 0 22px rgba(47, 220, 244, .08) !important;
+}
+
+#about .main-about-card p, #about .mini-card p, #education .education-content p,
+#projects .project-card p, #experience .experience-content p, #research .research-card p,
+#certifications .cert-content p, #contact .contact-info-panel p, #contact .contact-form p {
+  color: var(--night-soft) !important;
+  -webkit-text-fill-color: var(--night-soft) !important;
+  text-shadow: none !important;
+}
+
+#research .authors, #skills .skill-top strong,
+#education .education-date, #experience .experience-date {
+  color: var(--night-gold) !important;
+  -webkit-text-fill-color: var(--night-gold) !important;
+}
+
+#about .mini-card i, #skills .skill-top i, #education .education-icon,
+#projects .project-icon, #experience .experience-icon, #research .research-icon,
+#certifications .cert-icon, #contact .contact-row i {
+  color: #061019 !important;
+  background: linear-gradient(135deg, var(--night-gold), var(--night-cyan)) !important;
+  box-shadow:
+    0 20px 42px -24px rgba(47, 220, 244, .84),
+    0 0 0 1px rgba(255,255,255,.18) inset !important;
+}
+
+#about .about-points span, #skills .skill-tags span, #projects .project-tech span,
+#experience .experience-tech span, #research .research-tags span, #certifications .cert-tags span {
+  color: #eaf4ff !important;
+  -webkit-text-fill-color: #eaf4ff !important;
+  background: rgba(255, 255, 255, .055) !important;
+  border: 1px solid rgba(243, 200, 107, .16) !important;
+  box-shadow: 0 12px 30px -26px rgba(47, 220, 244, .75) !important;
+}
+
+#about .about-points i, #research .research-meta i, #certifications .cert-details i {
+  color: var(--night-cyan) !important;
+}
+
+#skills .skill-bar {
+  background: rgba(255, 255, 255, .09) !important;
+}
+
+#skills .skill-bar span {
+  background: linear-gradient(90deg, var(--night-gold), var(--night-cyan), rgba(var(--accent-c), 1)) !important;
+  box-shadow: 0 0 24px rgba(47, 220, 244, .28) !important;
+}
+
+#skills .skill-tags span:hover, #projects .project-tech span:hover {
+  color: #061019 !important;
+  -webkit-text-fill-color: #061019 !important;
+  background: linear-gradient(135deg, var(--night-gold), var(--night-cyan)) !important;
+}
+
+#projects .project-cover {
+  background:
+    radial-gradient(circle at 22% 18%, rgba(47,220,244,.18), transparent 36%),
+    radial-gradient(circle at 82% 18%, rgba(243,200,107,.16), transparent 34%),
+    linear-gradient(135deg, rgba(7,15,26,.94), rgba(13,28,45,.96)) !important;
+}
+
+#projects .project-cover::after {
+  background:
+    linear-gradient(180deg, transparent 44%, rgba(5, 9, 18, .82)),
+    linear-gradient(115deg, rgba(243,200,107,.14), transparent 42%) !important;
+}
+
+#projects .project-cover > span {
+  color: #061019 !important;
+  background: linear-gradient(135deg, var(--night-gold), var(--night-cyan)) !important;
+  box-shadow: 0 24px 48px -28px rgba(47, 220, 244, .9) !important;
+}
+
+#projects .project-cover--placeholder {
+  background:
+    radial-gradient(circle at 24% 18%, rgba(47,220,244,.18), transparent 34%),
+    radial-gradient(circle at 78% 26%, rgba(243,200,107,.16), transparent 36%),
+    linear-gradient(135deg, #07101b, #0e1c2d 52%, #171823) !important;
+}
+
+#projects .project-links a:first-child, #contact .contact-form button {
+  color: #061019 !important;
+  -webkit-text-fill-color: #061019 !important;
+  background: linear-gradient(135deg, var(--night-gold), var(--night-cyan)) !important;
+  box-shadow: 0 22px 48px -28px rgba(47, 220, 244, .84) !important;
+}
+
+#projects .project-links a:last-child {
+  color: var(--night-gold-2) !important;
+  -webkit-text-fill-color: var(--night-gold-2) !important;
+  background: rgba(255, 255, 255, .055) !important;
+  border: 1px solid rgba(243, 200, 107, .18) !important;
+}
+
+#contact .contact-row {
+  color: #eaf4ff !important;
+  -webkit-text-fill-color: #eaf4ff !important;
+  background: rgba(255, 255, 255, .045) !important;
+  border: 1px solid rgba(47, 220, 244, .13) !important;
+}
+
+#contact .contact-row:hover {
+  border-color: rgba(243, 200, 107, .28) !important;
+  background: rgba(243, 200, 107, .075) !important;
+}
+
+#contact .contact-form input,
+#contact .contact-form textarea {
+  color: #f4f8ff !important;
+  -webkit-text-fill-color: #f4f8ff !important;
+  background: rgba(4, 10, 18, .54) !important;
+  border: 1px solid rgba(47, 220, 244, .16) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.055) !important;
+}
+
+#contact .contact-form input::placeholder,
+#contact .contact-form textarea::placeholder {
+  color: rgba(234, 244, 255, .56) !important;
+  -webkit-text-fill-color: rgba(234, 244, 255, .56) !important;
+}
+
+#contact .contact-form input:focus,
+#contact .contact-form textarea:focus {
+  border-color: rgba(243, 200, 107, .5) !important;
+  box-shadow: 0 0 0 4px rgba(47, 220, 244, .12), 0 18px 38px -28px rgba(47, 220, 244, .82) !important;
+}
+
+.professional-footer {
+  --accent-a: 243, 200, 107;
+  --accent-b: 47, 220, 244;
+  --accent-c: 132, 103, 255;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(47,220,244,.12), transparent 34%),
+    linear-gradient(145deg, #07101b, #0b1524 58%, #111827) !important;
+  border-top: 1px solid rgba(243, 200, 107, .16) !important;
+}
+
+.professional-footer,
+.professional-footer p,
+.professional-footer a,
+.footer-bottom {
+  color: var(--night-soft) !important;
+  -webkit-text-fill-color: var(--night-soft) !important;
+}
+
+.footer-logo span,
+.footer-contact a:hover {
+  color: var(--night-gold) !important;
+  -webkit-text-fill-color: var(--night-gold) !important;
+}
+
+@keyframes night-drift {
+  0% { background-position: 0% 0%, 100% 0%, 30% 100%, 0 0; }
+  100% { background-position: 100% 16%, 0% 64%, 86% 0%, 0 0; }
+}
+
+@keyframes star-blink {
+  0%, 100% {
+    opacity: .48;
+    filter: drop-shadow(0 0 2px rgba(47,220,244,.28));
+    background-position: 8px 14px, 70px 36px, 130px 86px, 0 0, 0 0;
+  }
+  42% {
+    opacity: .78;
+    filter: drop-shadow(0 0 6px rgba(243,200,107,.22));
+  }
+  68% {
+    opacity: .62;
+    background-position: 12px 18px, 64px 42px, 138px 78px, 10px 12px, -8px 8px;
+  }
+}
+
+@keyframes night-wave {
+  0% {
+    background-position: center, center, 0 100%, 0% 0;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    background-position: center, center, 90px 100%, 100% 0;
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@media (max-width: 700px) {
+  #about, #skills, #education, #projects,
+  #experience, #research, #certifications, #contact {
+    background-size: 185% 185%, 190% 190%, 190% 190%, 100% 100% !important;
+  }
+
+  #about::before, #skills::before, #education::before, #projects::before,
+  #experience::before, #research::before, #certifications::before, #contact::before {
+    opacity: .52 !important;
+    background-size: 96px 96px, 150px 150px, 205px 205px, 48px 48px, 48px 48px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #about, #skills, #education, #projects,
+  #experience, #research, #certifications, #contact,
+  #about::before, #skills::before, #education::before, #projects::before,
+  #experience::before, #research::before, #certifications::before, #contact::before,
+  #about::after, #skills::after, #education::after, #projects::after,
+  #experience::after, #research::after, #certifications::after, #contact::after {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   VISIBLE ANIMATED NIGHT BACKGROUND
+   Real DOM stars + aurora + river-wave light layer.
+   ============================================================ */
+#about, #skills, #education, #projects,
+#experience, #research, #certifications, #contact {
+  overflow: hidden !important;
+}
+
+.night-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+#about .container, #skills .container, #education .container, #projects .container,
+#experience .container, #research .container, #certifications .container, #contact .container {
+  z-index: 4 !important;
+}
+
+.night-bg__aurora,
+.night-bg__waves,
+.night-bg__shooting,
+.night-bg__stars {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.night-bg__aurora {
+  opacity: .78;
+  filter: blur(1px) saturate(130%);
+  background:
+    radial-gradient(720px 320px at 12% 18%, rgba(47, 220, 244, .24), transparent 62%),
+    radial-gradient(680px 300px at 82% 8%, rgba(243, 200, 107, .20), transparent 64%),
+    radial-gradient(760px 340px at 56% 88%, rgba(132, 103, 255, .15), transparent 66%),
+    conic-gradient(from 210deg at 50% 55%, transparent 0 18%, rgba(47, 220, 244, .13) 26%, transparent 38%, rgba(243, 200, 107, .11) 54%, transparent 70%);
+  background-size: 110% 110%, 115% 115%, 120% 120%, 150% 150%;
+  animation: aurora-flow 12s ease-in-out infinite alternate;
+}
+
+.night-bg__waves {
+  top: auto;
+  height: 42%;
+  opacity: .72;
+  mix-blend-mode: screen;
+  background:
+    repeating-radial-gradient(ellipse at 50% 112%, rgba(47, 220, 244, .24) 0 1px, transparent 2px 19px),
+    repeating-radial-gradient(ellipse at 48% 118%, rgba(243, 200, 107, .13) 0 1px, transparent 2px 27px),
+    linear-gradient(90deg, transparent 0 8%, rgba(47, 220, 244, .16) 22%, transparent 42%, rgba(243, 200, 107, .13) 68%, transparent 92%);
+  background-size: 100% 230px, 100% 270px, 220% 100%;
+  background-position: 0 100%, 70px 100%, 0 0;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 100%);
+  animation: river-wave 6.5s ease-in-out infinite alternate;
+}
+
+.night-bg__shooting {
+  inset: 8% -18% auto auto;
+  width: 34rem;
+  height: 2px;
+  opacity: 0;
+  transform: rotate(-18deg) translate3d(0, 0, 0);
+  background: linear-gradient(90deg, transparent, rgba(255, 244, 205, .95), rgba(47, 220, 244, .8), transparent);
+  filter: drop-shadow(0 0 12px rgba(47, 220, 244, .62));
+  animation: shooting-light 9s ease-in-out infinite;
+}
+
+.night-star {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 999px;
+  opacity: .28;
+  background: #ffffff;
+  transform: translate3d(-50%, -50%, 0) scale(.72);
+  box-shadow:
+    0 0 calc(var(--s) * 3) rgba(255,255,255,.58),
+    0 0 calc(var(--s) * 8) rgba(47,220,244,var(--glow));
+  animation: real-star-twinkle var(--dur) ease-in-out infinite;
+  animation-delay: var(--d);
+}
+
+.night-star::before,
+.night-star::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: calc(var(--s) * 4.8);
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.night-star::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.night-star:nth-child(3n) {
+  background: var(--night-cyan);
+  box-shadow:
+    0 0 calc(var(--s) * 4) rgba(47,220,244,.7),
+    0 0 calc(var(--s) * 10) rgba(47,220,244,var(--glow));
+}
+
+.night-star:nth-child(4n) {
+  background: var(--night-gold-2);
+  box-shadow:
+    0 0 calc(var(--s) * 4) rgba(243,200,107,.62),
+    0 0 calc(var(--s) * 11) rgba(243,200,107,var(--glow));
+}
+
+.night-star:nth-child(8n) {
+  width: calc(var(--s) * 1.55);
+  height: calc(var(--s) * 1.55);
+}
+
+.night-star:nth-child(8n)::before,
+.night-star:nth-child(8n)::after {
+  opacity: .74;
+}
+
+@keyframes real-star-twinkle {
+  0%, 100% {
+    opacity: .18;
+    transform: translate3d(-50%, -50%, 0) scale(.55);
+    filter: brightness(.86);
+  }
+  28% {
+    opacity: .92;
+    transform: translate3d(-50%, -50%, 0) scale(1.45);
+    filter: brightness(1.6);
+  }
+  52% {
+    opacity: .34;
+    transform: translate3d(-50%, -50%, 0) scale(.78);
+    filter: brightness(.95);
+  }
+  74% {
+    opacity: .78;
+    transform: translate3d(-50%, -50%, 0) scale(1.12);
+    filter: brightness(1.25);
+  }
+}
+
+@keyframes aurora-flow {
+  0% {
+    opacity: .56;
+    background-position: 0% 0%, 100% 0%, 20% 100%, 0% 50%;
+    transform: translate3d(-1.2%, 0, 0) scale(1);
+  }
+  50% {
+    opacity: .88;
+  }
+  100% {
+    opacity: .72;
+    background-position: 100% 26%, 0% 54%, 84% 0%, 100% 50%;
+    transform: translate3d(1.2%, -1.6%, 0) scale(1.04);
+  }
+}
+
+@keyframes river-wave {
+  0% {
+    opacity: .48;
+    background-position: 0 100%, 70px 100%, 0% 0;
+    transform: translate3d(0, 8px, 0) scaleY(.96);
+  }
+  50% {
+    opacity: .82;
+  }
+  100% {
+    opacity: .72;
+    background-position: 92px 100%, -40px 100%, 100% 0;
+    transform: translate3d(0, -6px, 0) scaleY(1.04);
+  }
+}
+
+@keyframes shooting-light {
+  0%, 58%, 100% {
+    opacity: 0;
+    transform: rotate(-18deg) translate3d(0, 0, 0);
+  }
+  64% {
+    opacity: .92;
+  }
+  72% {
+    opacity: 0;
+    transform: rotate(-18deg) translate3d(-118vw, 32vh, 0);
+  }
+}
+
+@media (max-width: 700px) {
+  .night-bg__aurora {
+    opacity: .66;
+  }
+
+  .night-bg__waves {
+    height: 34%;
+    opacity: .62;
+  }
+
+  .night-star:nth-child(n + 29) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .night-bg__aurora,
+  .night-bg__waves,
+  .night-bg__shooting,
+  .night-star {
+    animation: none !important;
+  }
+}
