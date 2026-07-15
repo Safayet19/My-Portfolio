@@ -174,8 +174,8 @@ class Particle {
 
   draw() {
     ctx.beginPath();
-    ctx.fillStyle = "rgba(37, 99, 235, 0.42)";
-    ctx.shadowColor = "rgba(37, 99, 235, 0.26)";
+    ctx.fillStyle = "rgba(73, 216, 155, 0.44)";
+    ctx.shadowColor = "rgba(53, 200, 135, 0.28)";
     ctx.shadowBlur = 8;
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fill();
@@ -199,7 +199,7 @@ function connectParticles() {
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       if (distance < 135) {
-        ctx.strokeStyle = `rgba(37, 99, 235, ${0.48 - distance / 290})`;
+        ctx.strokeStyle = `rgba(73, 216, 155, ${0.42 - distance / 320})`;
         ctx.lineWidth = 0.65;
         ctx.beginPath();
         ctx.moveTo(particles[a].x, particles[a].y);

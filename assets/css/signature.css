@@ -1,63 +1,145 @@
-/* Safayet portfolio: final visual authority.
-   One palette only: carbon, pearl, warm gray, and controlled copper. */
+/* ================================================================
+   SAFAYET — SIGNATURE FOREST-TECH SYSTEM
+   Graphite forest surfaces, ivory type, emerald action, mint signal.
+   This file is the final visual authority loaded after all base CSS.
+   ================================================================ */
 
-.site-header,
-.section,
-.professional-footer,
-.project-modal {
-  --signature-bg: #111014;
-  --signature-surface: #1a181d;
-  --signature-elevated: #211e23;
-  --signature-pearl: #f2efe9;
-  --signature-muted: #a29b97;
-  --signature-copper: #d57949;
-  --signature-copper-soft: #e59a6e;
-  --signature-line: rgba(255, 255, 255, 0.085);
+:root {
+  --lux-bg: #07110d;
+  --lux-bg-deep: #030a06;
+  --lux-surface: #10231b;
+  --lux-surface-raised: #152d24;
+  --lux-surface-hover: #1b382c;
+  --lux-text: #f2f6f0;
+  --lux-text-soft: #d9e3dc;
+  --lux-muted: #9eaaa2;
+  --lux-primary: #35c887;
+  --lux-primary-strong: #24b879;
+  --lux-secondary: #49d89b;
+  --lux-line: rgba(164, 177, 200, 0.15);
+  --lux-line-strong: rgba(164, 177, 200, 0.24);
+  --lux-shadow: 0 24px 70px rgba(1, 6, 3, 0.4);
 }
 
+body {
+  background: var(--lux-bg);
+}
+
+/* Home keeps its original layout and particle animation; only the visual system changes. */
+.home {
+  background:
+    radial-gradient(circle at 76% 22%, rgba(53, 200, 135, 0.2), transparent 30%),
+    radial-gradient(circle at 12% 84%, rgba(143, 229, 189, 0.09), transparent 29%),
+    linear-gradient(135deg, #06100b 0%, #0b1b14 55%, #07110d 100%);
+}
+.home-content h1 {
+  color: var(--lux-text);
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+}
+.home-content h1 span {
+  color: var(--lux-secondary);
+  background: linear-gradient(90deg, var(--lux-primary), #8fe5bd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.typing-line {
+  color: #d2ddd5;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+}
+.typing-text {
+  color: #6fe0aa;
+}
+.home-btn {
+  border: 1px solid rgba(143, 229, 189, 0.18);
+  background: linear-gradient(100deg, #1ca96b, #49d89b);
+  color: #04100a;
+  box-shadow: 0 18px 38px rgba(12, 104, 62, 0.3);
+}
+.home-btn:hover {
+  box-shadow: 0 22px 46px rgba(12, 104, 62, 0.4);
+}
+.socials a {
+  border: 1px solid rgba(143, 229, 189, 0.14);
+  background: rgba(16, 35, 27, 0.92);
+  color: #7ce2b0;
+  box-shadow: 0 14px 30px rgba(1, 6, 3, 0.28);
+}
+.socials a:hover {
+  border-color: rgba(143, 229, 189, 0.42);
+  background: linear-gradient(135deg, #1ca96b, #35c887);
+  color: #ffffff;
+}
+.image-ring {
+  border: 1px solid rgba(143, 229, 189, 0.28);
+  background: linear-gradient(145deg, #dff9e9, #bdebcf);
+  box-shadow: 0 24px 70px rgba(1, 6, 3, 0.45), 0 0 0 10px rgba(53, 200, 135, 0.035);
+}
+.image-ring::before {
+  background: radial-gradient(circle, rgba(73, 216, 155, 0.27), transparent 65%);
+}
+
+/* Navigation */
 .site-header {
-  border-bottom-color: rgba(213, 121, 73, 0.27);
-  background: rgba(17, 16, 20, 0.975);
-  box-shadow: 0 14px 42px rgba(3, 2, 4, 0.34);
+  height: 7.8rem;
+  border-bottom: 1px solid rgba(53, 200, 135, 0.2);
+  background: rgba(7, 17, 13, 0.88);
+  box-shadow: 0 12px 38px rgba(1, 6, 3, 0.28);
+  backdrop-filter: blur(18px) saturate(135%);
 }
 .site-header .logo-brand {
-  color: var(--signature-pearl);
+  color: var(--lux-text);
 }
 .site-header .logo-brand span,
 .site-header .navbar a {
-  font-family: "Manrope", sans-serif;
+  font-family: "Sora", sans-serif;
+}
+.site-header .logo-brand span {
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
 .site-header .navbar a {
-  color: #aaa39f;
-  font-size: clamp(1.62rem, 1.22vw, 1.85rem);
-  font-weight: 700;
+  color: #a9b5ad;
+  font-size: clamp(1.5rem, 1.1vw, 1.68rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 .site-header .navbar a:hover,
 .site-header .navbar a.active {
-  color: var(--signature-copper-soft);
+  color: var(--lux-text);
 }
 .site-header .navbar a::after {
-  background: var(--signature-copper);
-  box-shadow: none;
+  height: 3px;
+  background: linear-gradient(90deg, var(--lux-primary), var(--lux-secondary));
+  box-shadow: 0 0 16px rgba(53, 200, 135, 0.38);
+}
+.menu-toggle {
+  color: var(--lux-text);
 }
 
+/* Shared section language */
 .section,
 .professional-footer,
 .project-modal {
   font-family: "Inter", sans-serif;
 }
 .section {
-  --pro-ink: var(--signature-pearl);
-  --pro-muted: var(--signature-muted);
-  --pro-blue: var(--signature-copper);
-  --pro-blue-dark: #b85f36;
-  --pro-cyan: #bf8666;
-  --pro-line: var(--signature-line);
-  --pro-panel: var(--signature-elevated);
-  --pro-soft: #252126;
-  border-top-color: rgba(213, 121, 73, 0.1);
+  --pro-ink: var(--lux-text);
+  --pro-muted: var(--lux-muted);
+  --pro-blue: var(--lux-primary);
+  --pro-blue-dark: var(--lux-primary-strong);
+  --pro-cyan: var(--lux-secondary);
+  --pro-line: var(--lux-line);
+  --pro-panel: var(--lux-surface);
+  --pro-soft: var(--lux-surface-raised);
+  border-top-color: rgba(53, 200, 135, 0.08);
+  background:
+    radial-gradient(circle at 88% 4%, rgba(53, 200, 135, 0.115), transparent 29%),
+    radial-gradient(circle at 7% 96%, rgba(73, 216, 155, 0.05), transparent 25%),
+    linear-gradient(180deg, var(--lux-bg), #0a1712);
 }
-
 .about.section,
 .skills.section,
 .education.section,
@@ -67,17 +149,29 @@
 .certifications.section,
 .contact.section {
   background:
-    radial-gradient(circle at 88% 5%, rgba(124, 55, 66, 0.095), transparent 30%),
-    radial-gradient(circle at 8% 92%, rgba(213, 121, 73, 0.045), transparent 28%),
-    var(--signature-bg);
+    radial-gradient(circle at 88% 4%, rgba(53, 200, 135, 0.115), transparent 29%),
+    radial-gradient(circle at 7% 96%, rgba(73, 216, 155, 0.05), transparent 25%),
+    linear-gradient(180deg, var(--lux-bg), #0a1712);
 }
-
+.skills.section,
+.research.section {
+  background-image:
+    linear-gradient(rgba(164, 177, 200, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(164, 177, 200, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at 88% 4%, rgba(53, 200, 135, 0.12), transparent 29%),
+    radial-gradient(circle at 7% 96%, rgba(73, 216, 155, 0.055), transparent 25%),
+    linear-gradient(180deg, var(--lux-bg), #0a1712);
+  background-size: 64px 64px, 64px 64px, auto, auto, auto;
+}
 .section > .container::before,
 .experience .experience-item::after {
   content: none !important;
   display: none !important;
 }
 
+.section .section-heading {
+  max-width: 92rem;
+}
 .section .section-heading h2,
 .section .main-about-card h3,
 .section .mini-card h3,
@@ -88,18 +182,22 @@
 .section .research-card h3,
 .section .cert-info-card h3,
 .section .contact-info-panel h3,
-.section .contact-form h3 {
-  color: var(--signature-pearl);
-  font-family: "Manrope", sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.035em;
+.section .contact-form h3,
+.project-modal h2,
+.project-modal h3 {
+  color: var(--lux-text);
+  font-family: "Sora", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.04em;
 }
 .section .section-heading h2 {
-  color: #f5f2ed;
-  font-weight: 800;
-  letter-spacing: -0.045em;
+  color: var(--lux-text);
+  font-size: clamp(3.3rem, 4.8vw, 5.6rem);
+  font-weight: 600;
   line-height: 1.08;
-  text-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+  text-shadow: 0 16px 45px rgba(1, 6, 3, 0.38);
 }
 .section .section-heading p,
 .section .main-about-card p,
@@ -111,12 +209,12 @@
 .section .contact-info-panel > p,
 .skills .section-heading p,
 .research .section-heading p {
-  color: var(--signature-muted);
+  color: var(--lux-muted);
+  font-size: 1.55rem;
   font-weight: 400;
-  letter-spacing: -0.008em;
   line-height: 1.75;
+  letter-spacing: -0.012em;
 }
-
 .section .eyebrow,
 .skills .eyebrow,
 .research .eyebrow,
@@ -125,37 +223,39 @@
 .projects .project-type,
 .experience .experience-content > span,
 .project-modal__body .eyebrow {
-  color: var(--signature-copper-soft);
-  font-family: "Manrope", sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.17em;
+  color: var(--lux-secondary);
+  font-family: "Sora", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.16em;
 }
 .section .eyebrow::before {
-  background: var(--signature-copper);
+  background: linear-gradient(90deg, var(--lux-primary), var(--lux-secondary));
 }
 
+/* Surfaces */
 .about .main-about-card,
 .skills .skill-card,
 .education .education-card,
 .projects .project-card,
 .experience .experience-item,
 .research .research-card,
-.research .research-card:first-child,
 .certifications .certification-showcase,
 .contact .contact-info-panel,
 .contact .contact-form {
-  border-color: var(--signature-line);
-  background: linear-gradient(145deg, var(--signature-elevated), var(--signature-surface));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 24px 64px rgba(3, 2, 4, 0.27);
+  border-color: var(--lux-line);
+  background:
+    linear-gradient(145deg, rgba(53, 200, 135, 0.035), transparent 44%),
+    linear-gradient(145deg, var(--lux-surface-raised), var(--lux-surface));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), var(--lux-shadow);
 }
 .about .main-about-card,
 .research .research-card:first-child {
-  box-shadow: inset 3px 0 0 var(--signature-copper), inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 24px 64px rgba(3, 2, 4, 0.27);
+  box-shadow: inset 3px 0 0 var(--lux-primary), inset 0 1px 0 rgba(255, 255, 255, 0.035), var(--lux-shadow);
 }
 .about .mini-card,
 .certifications .cert-info-card {
-  border-color: var(--signature-line);
-  background: linear-gradient(145deg, #201d22, #19171b);
+  border-color: var(--lux-line);
+  background: linear-gradient(145deg, #142a22, #0e1e18);
 }
 .about .mini-card:hover,
 .skills .skill-card:hover,
@@ -163,18 +263,24 @@
 .projects .project-card:hover,
 .experience .experience-item:hover,
 .research .research-card:hover {
-  border-color: rgba(213, 121, 73, 0.35);
-  background: linear-gradient(145deg, #252126, #1d1a1f);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 30px 74px rgba(3, 2, 4, 0.34);
+  border-color: rgba(53, 200, 135, 0.38);
+  background:
+    linear-gradient(145deg, rgba(53, 200, 135, 0.075), transparent 48%),
+    linear-gradient(145deg, var(--lux-surface-hover), #13291f);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045), 0 34px 85px rgba(1, 6, 3, 0.48);
 }
 
+/* About */
+.about .main-about-card {
+  border-left-color: rgba(53, 200, 135, 0.48);
+}
 .about .mini-card i,
 .skills .skill-top i,
 .experience .experience-marker,
 .certifications .cert-icon {
-  border-color: rgba(213, 121, 73, 0.27);
-  background: rgba(213, 121, 73, 0.075);
-  color: var(--signature-copper-soft);
+  border-color: rgba(73, 216, 155, 0.24);
+  background: rgba(73, 216, 155, 0.07);
+  color: var(--lux-secondary);
 }
 .about .about-points span,
 .skills .skill-tags span,
@@ -183,110 +289,119 @@
 .education .education-tags span,
 .projects .project-tech span,
 .project-modal .project-tech span {
-  border-color: var(--signature-line);
-  background: rgba(255, 255, 255, 0.032);
-  color: #c3bdb9;
+  border-color: var(--lux-line);
+  background: rgba(164, 177, 200, 0.045);
+  color: #c7d2cb;
 }
 .about .about-points i,
 .skills .skill-top strong,
 .research .research-meta i,
 .contact .contact-row i,
 .certifications .cert-details i {
-  color: var(--signature-copper);
+  color: var(--lux-secondary);
 }
 
+/* Skills */
 .skills .skill-card::after {
-  background: linear-gradient(90deg, transparent, var(--signature-copper), var(--signature-copper-soft), transparent);
+  background: linear-gradient(90deg, transparent, var(--lux-primary), var(--lux-secondary), transparent);
 }
 .skills .skill-bar {
-  background: rgba(255, 255, 255, 0.065);
+  background: rgba(164, 177, 200, 0.09);
 }
 .skills .skill-bar span {
-  background: linear-gradient(90deg, #b95f36, var(--signature-copper-soft));
-  box-shadow: 0 0 12px rgba(213, 121, 73, 0.2);
+  background: linear-gradient(90deg, var(--lux-primary-strong), var(--lux-secondary));
+  box-shadow: 0 0 16px rgba(53, 200, 135, 0.25);
 }
+
+/* Education */
 .education .education-wrapper::before {
-  background: linear-gradient(var(--signature-copper), rgba(213, 121, 73, 0.36), rgba(213, 121, 73, 0.035));
+  background: linear-gradient(var(--lux-primary), var(--lux-secondary), rgba(73, 216, 155, 0.04));
 }
 .education .education-card::before {
-  background: var(--signature-copper);
-  box-shadow: 0 0 0 1px var(--signature-copper), 0 0 14px rgba(213, 121, 73, 0.25);
+  background: var(--lux-primary);
+  box-shadow: 0 0 0 1px var(--lux-primary), 0 0 18px rgba(53, 200, 135, 0.38);
 }
 .education .education-content h4,
 .research .authors {
-  color: #c69274;
+  color: #8fd7af;
 }
 
+/* Projects */
 .projects .project-cover img {
-  filter: saturate(0.72) contrast(1.04) brightness(0.93);
+  filter: saturate(0.78) contrast(1.045) brightness(0.92);
 }
 .projects .project-card:hover .project-cover img {
-  filter: saturate(0.84) contrast(1.045) brightness(0.96);
+  filter: saturate(0.92) contrast(1.05) brightness(0.96);
 }
 .projects .project-cover::after {
-  background: linear-gradient(180deg, transparent 45%, rgba(17, 16, 20, 0.84));
+  background: linear-gradient(180deg, transparent 42%, rgba(7, 17, 13, 0.88));
 }
 .projects .project-links a:first-child,
 .contact .contact-form button,
 .pm-btn {
   border-color: transparent;
-  background: linear-gradient(100deg, #bf6339, var(--signature-copper-soft));
-  color: #171014;
-  box-shadow: 0 14px 30px rgba(129, 57, 28, 0.22);
+  background: linear-gradient(100deg, var(--lux-primary-strong), #5bddaa);
+  color: #ffffff;
+  box-shadow: 0 14px 32px rgba(24, 122, 78, 0.28);
 }
 .projects .project-links a:last-child {
-  border-color: var(--signature-line);
-  background: rgba(255, 255, 255, 0.03);
-  color: #ddd7d2;
+  border-color: var(--lux-line-strong);
+  background: rgba(164, 177, 200, 0.045);
+  color: var(--lux-text-soft);
+}
+.projects .project-links a:hover {
+  border-color: rgba(73, 216, 155, 0.5);
 }
 
-/* Research: one consistent editorial timeline and one card per row. */
+/* Research — one coherent full-width visualization */
 .research .research-grid {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.4rem;
-  padding-left: 3rem;
+  gap: 1.5rem;
+  padding-left: 3.2rem;
 }
 .research .research-grid::before {
   content: "";
   position: absolute;
   top: 2.8rem;
   bottom: 2.8rem;
-  left: 0.7rem;
-  width: 1px;
-  background: linear-gradient(var(--signature-copper), rgba(213, 121, 73, 0.14));
+  left: 0.8rem;
+  width: 2px;
+  background: linear-gradient(var(--lux-primary), var(--lux-secondary), rgba(73, 216, 155, 0.08));
 }
 .research .research-card,
 .research .research-card:first-child {
   position: relative;
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 13.5rem minmax(0, 1fr);
+  grid-template-columns: 14rem minmax(0, 1fr);
   column-gap: 3rem;
   row-gap: 1rem;
   min-height: 0;
   overflow: visible;
   padding: 2.8rem 3.2rem;
-  border-radius: 1.4rem;
-  background: linear-gradient(115deg, #211e23, #18171a);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 20px 52px rgba(3, 2, 4, 0.24);
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(115deg, rgba(53, 200, 135, 0.05), transparent 48%),
+    linear-gradient(145deg, #142b22, #0d1b16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 22px 60px rgba(1, 6, 3, 0.36);
 }
 .research .research-card:first-child {
-  box-shadow: inset 3px 0 0 var(--signature-copper), 0 20px 52px rgba(3, 2, 4, 0.24);
+  box-shadow: inset 3px 0 0 var(--lux-primary), inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 22px 60px rgba(1, 6, 3, 0.36);
 }
 .research .research-card::before {
   content: "";
   position: absolute;
-  top: 3.3rem;
-  left: -2.85rem;
+  top: 3.2rem;
+  left: -3rem;
   display: block;
-  width: 1.2rem;
-  height: 1.2rem;
-  border: 2px solid var(--signature-bg);
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 2px solid var(--lux-bg);
   border-radius: 50%;
-  background: var(--signature-copper);
-  box-shadow: 0 0 0 4px var(--signature-bg), 0 0 0 5px rgba(213, 121, 73, 0.42);
+  background: var(--lux-primary);
+  box-shadow: 0 0 0 4px var(--lux-bg), 0 0 0 5px rgba(53, 200, 135, 0.48), 0 0 18px rgba(53, 200, 135, 0.42);
 }
 .research .research-status {
   grid-column: 1;
@@ -294,20 +409,18 @@
   align-self: start;
   justify-self: start;
   margin: 0;
-  border-color: rgba(213, 121, 73, 0.25);
-  background: rgba(213, 121, 73, 0.07);
-  color: #d8a184;
-  font-family: "Manrope", sans-serif;
+  font-family: "Sora", sans-serif;
+  font-weight: 600;
 }
 .research .research-status.accepted {
-  border-color: rgba(77, 166, 128, 0.34);
-  background: rgba(77, 166, 128, 0.1);
-  color: #8fd2b3;
+  border-color: rgba(78, 211, 165, 0.34);
+  background: rgba(78, 211, 165, 0.1);
+  color: #8fe5bd;
 }
 .research .research-status.review {
-  border-color: rgba(213, 121, 73, 0.3);
-  background: rgba(213, 121, 73, 0.09);
-  color: #e2a17e;
+  border-color: rgba(244, 181, 94, 0.34);
+  background: rgba(244, 181, 94, 0.1);
+  color: #f7c77f;
 }
 .research .research-card h3,
 .research .authors,
@@ -316,12 +429,12 @@
 }
 .research .research-card h3 {
   margin: 0;
-  font-size: clamp(2rem, 2.2vw, 2.75rem);
-  line-height: 1.3;
+  font-size: clamp(2rem, 2.15vw, 2.7rem);
+  line-height: 1.32;
 }
 .research .authors {
   margin: 0;
-  color: #c69274;
+  color: #8fd7af;
   font-size: 1.35rem;
   font-weight: 600;
 }
@@ -329,64 +442,88 @@
   margin-top: 0.5rem;
 }
 .research .research-meta span {
-  border-color: var(--signature-line);
-  background: rgba(255, 255, 255, 0.03);
-  color: #bbb4b0;
+  border-color: var(--lux-line);
+  background: rgba(164, 177, 200, 0.045);
+  color: #b7c5bc;
 }
 
+/* Certifications */
 .certifications .cert-badge {
-  border-color: rgba(213, 121, 73, 0.26);
-  background: rgba(213, 121, 73, 0.07);
-  color: #dca17f;
+  border-color: rgba(53, 200, 135, 0.28);
+  background: rgba(53, 200, 135, 0.09);
+  color: #9fe4be;
 }
 .certifications .cert-details li {
-  border-color: var(--signature-line);
-  color: #c3bdb9;
+  border-color: var(--lux-line);
+  color: #c4d0c8;
 }
 .certifications .cert-image-card {
-  border-color: var(--signature-line);
-  background: linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px), #19171b;
+  border-color: var(--lux-line);
+  background:
+    linear-gradient(rgba(164, 177, 200, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(164, 177, 200, 0.028) 1px, transparent 1px),
+    #0d1d17;
   background-size: 44px 44px, 44px 44px, auto;
 }
 
+/* Contact */
 .contact .contact-form input,
 .contact .contact-form textarea {
-  border-color: var(--signature-line);
-  background: rgba(255, 255, 255, 0.032);
-  color: var(--signature-pearl);
+  border-color: var(--lux-line);
+  background: rgba(164, 177, 200, 0.045);
+  color: var(--lux-text);
+  font-family: "Inter", sans-serif;
+}
+.contact .contact-form input::placeholder,
+.contact .contact-form textarea::placeholder {
+  color: #7e9085;
 }
 .contact .contact-form input:focus,
 .contact .contact-form textarea:focus {
-  border-color: var(--signature-copper);
-  background: rgba(255, 255, 255, 0.045);
-  box-shadow: 0 0 0 4px rgba(213, 121, 73, 0.09);
-}
-.professional-footer {
-  border-top-color: rgba(213, 121, 73, 0.2);
-  background: #0d0c0f;
-}
-#scroll-top {
-  border-color: rgba(213, 121, 73, 0.3);
-  background: #201c21;
-  color: var(--signature-copper-soft);
+  border-color: var(--lux-primary);
+  background: rgba(53, 200, 135, 0.055);
+  box-shadow: 0 0 0 4px rgba(53, 200, 135, 0.11);
 }
 
+/* Footer and overlays */
+.professional-footer {
+  border-top-color: rgba(53, 200, 135, 0.18);
+  background: var(--lux-bg-deep);
+}
+#scroll-top {
+  border-color: rgba(53, 200, 135, 0.34);
+  background: #162c23;
+  color: #9fe4be;
+  box-shadow: 0 14px 38px rgba(1, 6, 3, 0.4);
+}
+.project-modal__dialog,
+.project-modal__body,
+.project-modal__gallery {
+  border-color: var(--lux-line);
+  background: linear-gradient(145deg, var(--lux-surface-raised), #0d1d17);
+}
+
+/* Responsive */
 @media (max-width: 1200px) {
   .site-header .navbar {
-    border-left-color: rgba(213, 121, 73, 0.17);
-    background: rgba(17, 16, 20, 0.995);
+    border-left-color: rgba(53, 200, 135, 0.18);
+    background: rgba(7, 17, 13, 0.99);
   }
   .site-header .navbar a {
-    font-size: 1.62rem;
+    font-size: 1.58rem;
   }
   .site-header .navbar a:hover,
   .site-header .navbar a.active {
-    background: rgba(213, 121, 73, 0.075);
-    color: var(--signature-copper-soft);
+    background: rgba(53, 200, 135, 0.09);
+    color: var(--lux-text);
   }
 }
 
 @media (max-width: 760px) {
+  .section .section-heading h2 {
+    font-size: clamp(3rem, 10vw, 4.3rem);
+    line-height: 1.1;
+  }
   .research .research-grid {
     padding-left: 2.2rem;
   }
@@ -411,4 +548,318 @@
   .research .research-meta {
     grid-column: 1;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section *,
+  .site-header * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ================================================================
+   BELOW-HOME EDITORIAL LAYER
+   Home is intentionally untouched. Later sections use forest + champagne.
+   ================================================================ */
+.section {
+  --editorial-bg: #0a100c;
+  --editorial-bg-warm: #12120e;
+  --editorial-surface: #121b16;
+  --editorial-surface-raised: #18231c;
+  --editorial-ivory: #f4f1e9;
+  --editorial-muted: #a8b0a9;
+  --editorial-emerald: #3ccf8e;
+  --editorial-gold: #d8b16e;
+  --editorial-line: rgba(224, 232, 224, 0.12);
+  --pro-ink: var(--editorial-ivory);
+  --pro-muted: var(--editorial-muted);
+  --pro-blue: var(--editorial-emerald);
+  --pro-cyan: var(--editorial-gold);
+  --pro-line: var(--editorial-line);
+}
+
+.about.section,
+.projects.section,
+.research.section,
+.contact.section {
+  background:
+    radial-gradient(circle at 86% 8%, rgba(60, 207, 142, 0.105), transparent 29%),
+    radial-gradient(circle at 7% 90%, rgba(216, 177, 110, 0.045), transparent 26%),
+    linear-gradient(180deg, #07110d, #0b1711);
+}
+.skills.section,
+.education.section,
+.experience.section,
+.certifications.section {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(216, 177, 110, 0.085), transparent 28%),
+    radial-gradient(circle at 90% 90%, rgba(60, 207, 142, 0.055), transparent 25%),
+    linear-gradient(180deg, #10110d, #0b120e);
+}
+.skills.section,
+.research.section {
+  background-image:
+    linear-gradient(rgba(224, 232, 224, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(224, 232, 224, 0.022) 1px, transparent 1px),
+    radial-gradient(circle at 86% 8%, rgba(60, 207, 142, 0.105), transparent 29%),
+    radial-gradient(circle at 7% 90%, rgba(216, 177, 110, 0.045), transparent 26%),
+    linear-gradient(180deg, #07110d, #0b1711);
+  background-size: 72px 72px, 72px 72px, auto, auto, auto;
+}
+
+.section .section-heading h2,
+.section .main-about-card h3,
+.section .mini-card h3,
+.section .skill-card h3,
+.section .education-content h3,
+.section .project-card h3,
+.section .experience-content h3,
+.section .research-card h3,
+.section .cert-info-card h3,
+.section .contact-info-panel h3,
+.section .contact-form h3 {
+  color: var(--editorial-ivory);
+}
+.section .section-heading h2 {
+  background: linear-gradient(105deg, #fffdf8 0%, #e5ebe5 62%, #d8e2da 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section .section-heading p,
+.section .main-about-card p,
+.section .mini-card p,
+.section .education-content p,
+.section .project-card p,
+.section .experience-content p,
+.section .cert-info-card p,
+.section .contact-info-panel > p,
+.skills .section-heading p,
+.research .section-heading p {
+  color: var(--editorial-muted);
+}
+
+.section .eyebrow,
+.skills .eyebrow,
+.research .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: fit-content;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(216, 177, 110, 0.2);
+  border-radius: 999px;
+  background: rgba(216, 177, 110, 0.055);
+  color: var(--editorial-gold);
+  letter-spacing: 0.13em;
+}
+.section .eyebrow::before {
+  display: none;
+}
+.center-heading .eyebrow {
+  margin-inline: auto;
+}
+
+.about .main-about-card,
+.skills .skill-card,
+.education .education-card,
+.projects .project-card,
+.experience .experience-item,
+.research .research-card,
+.certifications .certification-showcase,
+.contact .contact-info-panel,
+.contact .contact-form {
+  border-color: var(--editorial-line);
+  background:
+    linear-gradient(145deg, rgba(216, 177, 110, 0.025), transparent 38%),
+    linear-gradient(145deg, #18231c, #101914);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 28px 72px rgba(1, 7, 4, 0.34);
+}
+.about .main-about-card {
+  border-left-color: rgba(60, 207, 142, 0.6);
+  box-shadow: inset 3px 0 0 var(--editorial-emerald), inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 28px 72px rgba(1, 7, 4, 0.34);
+}
+.about .mini-card,
+.certifications .cert-info-card {
+  border-color: var(--editorial-line);
+  background:
+    radial-gradient(circle at 100% 0, rgba(216, 177, 110, 0.055), transparent 35%),
+    linear-gradient(145deg, #17211b, #101813);
+}
+.about .mini-card:hover,
+.skills .skill-card:hover,
+.education .education-card:hover,
+.projects .project-card:hover,
+.experience .experience-item:hover,
+.research .research-card:hover {
+  border-color: rgba(216, 177, 110, 0.35);
+  background:
+    linear-gradient(145deg, rgba(60, 207, 142, 0.055), transparent 45%),
+    linear-gradient(145deg, #1c2a21, #121c16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045), 0 34px 86px rgba(1, 7, 4, 0.42);
+}
+
+.about .mini-card i,
+.skills .skill-top i,
+.experience .experience-marker,
+.certifications .cert-icon {
+  border-color: rgba(216, 177, 110, 0.26);
+  background: rgba(216, 177, 110, 0.075);
+  color: var(--editorial-gold);
+}
+.about .about-points span,
+.skills .skill-tags span,
+.research .research-meta span,
+.contact .contact-row,
+.education .education-tags span,
+.projects .project-tech span,
+.project-modal .project-tech span {
+  border-color: var(--editorial-line);
+  background: rgba(244, 241, 233, 0.035);
+  color: #c7d0c8;
+}
+.about .about-points i,
+.skills .skill-top strong,
+.research .research-meta i,
+.contact .contact-row i,
+.certifications .cert-details i {
+  color: var(--editorial-emerald);
+}
+
+.skills .skill-card::after {
+  background: linear-gradient(90deg, transparent, var(--editorial-emerald), var(--editorial-gold), transparent);
+}
+.skills .skill-bar {
+  background: rgba(244, 241, 233, 0.065);
+}
+.skills .skill-bar span {
+  background: linear-gradient(90deg, #25b976, var(--editorial-emerald), #c8a35f);
+  box-shadow: 0 0 16px rgba(60, 207, 142, 0.22);
+}
+
+.education .education-wrapper::before {
+  background: linear-gradient(var(--editorial-gold), var(--editorial-emerald), rgba(60, 207, 142, 0.04));
+}
+.education .education-card::before {
+  background: var(--editorial-emerald);
+  box-shadow: 0 0 0 1px var(--editorial-emerald), 0 0 18px rgba(60, 207, 142, 0.32);
+}
+.education .education-content > span,
+.projects .project-type,
+.experience .experience-content > span {
+  color: var(--editorial-gold);
+}
+.education .education-content h4,
+.research .authors {
+  color: #dfbd83;
+}
+
+.projects .project-card {
+  overflow: hidden;
+  border-bottom-color: rgba(60, 207, 142, 0.28);
+}
+.projects .project-links a:first-child,
+.contact .contact-form button,
+.pm-btn {
+  background: linear-gradient(100deg, #1cad6d, #48d396);
+  color: #04110a;
+  box-shadow: 0 14px 32px rgba(10, 107, 61, 0.26);
+}
+.projects .project-links a:last-child {
+  border-color: rgba(216, 177, 110, 0.2);
+  background: rgba(216, 177, 110, 0.04);
+  color: #e4d6bd;
+}
+.projects .project-links a:hover {
+  border-color: var(--editorial-gold);
+}
+
+.research .research-grid::before {
+  background: linear-gradient(#3bd18e 0%, #d8b16e 48%, rgba(216, 177, 110, 0.08) 100%);
+}
+.research .research-card,
+.research .research-card:first-child {
+  grid-template-columns: 16rem minmax(0, 1fr);
+  background:
+    linear-gradient(115deg, rgba(216, 177, 110, 0.035), transparent 48%),
+    linear-gradient(145deg, #18231c, #101914);
+}
+.research .research-card:first-child {
+  box-shadow: inset 3px 0 0 #3bd18e, inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 24px 66px rgba(1, 7, 4, 0.36);
+}
+.research .research-card::before {
+  background: var(--editorial-gold);
+  box-shadow: 0 0 0 4px #07110d, 0 0 0 5px rgba(216, 177, 110, 0.55), 0 0 20px rgba(216, 177, 110, 0.32);
+}
+.research .featured-research::before {
+  background: #3bd18e;
+  box-shadow: 0 0 0 4px #07110d, 0 0 0 5px rgba(59, 209, 142, 0.58), 0 0 22px rgba(59, 209, 142, 0.38);
+}
+
+/* Strong semantic statuses: readable at a glance, not decorative tinting. */
+.research .research-status {
+  position: relative;
+  gap: 0.7rem;
+  padding: 0.9rem 1.25rem;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 999px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+.research .research-status::before {
+  content: "";
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  vertical-align: 0.08rem;
+  margin-right: 0.65rem;
+  background: currentColor;
+  box-shadow: 0 0 10px currentColor;
+}
+.research .research-status.accepted {
+  border-color: rgba(69, 225, 150, 0.62);
+  background: rgba(36, 170, 103, 0.18);
+  color: #8af0bc;
+  box-shadow: inset 0 0 18px rgba(69, 225, 150, 0.07), 0 0 22px rgba(36, 170, 103, 0.1);
+}
+.research .research-status.review {
+  border-color: rgba(232, 180, 88, 0.62);
+  background: rgba(190, 126, 36, 0.18);
+  color: #ffd38a;
+  box-shadow: inset 0 0 18px rgba(232, 180, 88, 0.07), 0 0 22px rgba(190, 126, 36, 0.1);
+}
+
+.certifications .cert-badge {
+  border-color: rgba(216, 177, 110, 0.34);
+  background: rgba(216, 177, 110, 0.1);
+  color: #efcc91;
+}
+.certifications .cert-image-card {
+  border-color: var(--editorial-line);
+  background:
+    linear-gradient(rgba(216, 177, 110, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(216, 177, 110, 0.025) 1px, transparent 1px),
+    #0d1711;
+  background-size: 48px 48px, 48px 48px, auto;
+}
+
+.contact .contact-form input,
+.contact .contact-form textarea {
+  border-color: var(--editorial-line);
+  background: rgba(244, 241, 233, 0.035);
+  color: var(--editorial-ivory);
+}
+.contact .contact-form input:focus,
+.contact .contact-form textarea:focus {
+  border-color: var(--editorial-emerald);
+  background: rgba(60, 207, 142, 0.045);
+  box-shadow: 0 0 0 4px rgba(60, 207, 142, 0.1);
+}
+.professional-footer {
+  border-top-color: rgba(216, 177, 110, 0.18);
+  background: #07100c;
 }
