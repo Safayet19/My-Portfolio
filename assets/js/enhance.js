@@ -1,332 +1,274 @@
-// Portfolio enhancements — reveal on scroll, stagger, cursor glow, skill fill.
+// Lightweight section interactions. The home section is intentionally untouched.
 (function () {
   const ready = (fn) =>
     document.readyState !== "loading"
       ? fn()
-      : document.addEventListener("DOMContentLoaded", fn);
+      : document.addEventListener("DOMContentLoaded", fn, { once: true });
 
   ready(() => {
-    // 1) Tag sections/cards for animation.
-    const sections = ["about", "skills", "education", "projects", "experience", "research", "certifications", "contact"];
-    sections.forEach((id) => {
-      const sec = document.getElementById(id);
-      if (!sec) return;
+    const sectionIds = [
+      "about",
+      "skills",
+      "education",
+      "projects",
+      "experience",
+      "research",
+      "certifications",
+      "contact"
+    ];
 
-      if (!sec.querySelector(":scope > .night-bg")) {
-        const bg = document.createElement("div");
-        bg.className = "night-bg";
-        bg.setAttribute("aria-hidden", "true");
+    const staggerSelectors = [
+      ".about-grid",
+      ".about-mini-grid",
+      ".about-points",
+      ".skills-grid",
+      ".education-wrapper",
+      ".projects-grid",
+      ".experience-list",
+      ".research-grid",
+      ".certification-showcase",
+      ".contact-layout"
+    ];
 
-        const aurora = document.createElement("span");
-        aurora.className = "night-bg__aurora";
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (!section) return;
 
-        const waves = document.createElement("span");
-        waves.className = "night-bg__waves";
+      const heading = section.querySelector(".section-heading");
+      if (heading) heading.dataset.reveal = "up";
 
-        const shooting = document.createElement("span");
-        shooting.className = "night-bg__shooting";
+      staggerSelectors.forEach((selector) => {
+        section.querySelectorAll(selector).forEach((element) => {
+          element.dataset.stagger = "";
+        });
+      });
+    });
 
-        const stars = document.createElement("span");
-        stars.className = "night-bg__stars";
+    const revealTargets = document.querySelectorAll(
+      "[data-reveal], [data-stagger], .skill-card"
+    );
 
-        const sectionIndex = sections.indexOf(id);
-        for (let i = 0; i < 44; i += 1) {
-          const star = document.createElement("span");
-          star.className = "night-star";
-
-          const x = (7 + i * 19 + sectionIndex * 11) % 96;
-          const y = (8 + i * 13 + sectionIndex * 17) % 82;
-          const size = 1.4 + ((i + sectionIndex) % 5) * 0.55;
-          const delay = -1 * (((i * 0.37) + sectionIndex * 0.61) % 6);
-          const duration = 2.2 + ((i + sectionIndex) % 7) * 0.42;
-          const glow = 0.45 + ((i + 2) % 4) * 0.13;
-
-          star.style.setProperty("--x", `${x}%`);
-          star.style.setProperty("--y", `${y}%`);
-          star.style.setProperty("--s", `${size}px`);
-          star.style.setProperty("--d", `${delay}s`);
-          star.style.setProperty("--dur", `${duration}s`);
-          star.style.setProperty("--glow", glow.toFixed(2));
-
-          stars.appendChild(star);
-        }
-
-        bg.append(aurora, waves, shooting, stars);
-        sec.prepend(bg);
-      }
-
-      const heading = sec.querySelector(".section-heading");
-      if (heading && !heading.hasAttribute("data-reveal")) heading.setAttribute("data-reveal", "up");
-
-      const staggerTargets = sec.querySelectorAll(
-        ".about-grid, .about-mini-grid, .about-points, .skills-grid, .education-wrapper, .projects-grid, .experience-list, .research-grid, .certification-showcase, .contact-grid, .contact-wrapper, .contact-layout, .certification-showcase, form"
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -48px 0px" }
       );
-      staggerTargets.forEach((el) => {
-        if (!el.hasAttribute("data-stagger")) el.setAttribute("data-stagger", "");
-      });
 
-      // Individual cards get a soft reveal too, in case they're direct children of the section.
-      sec.querySelectorAll(".about-card, .mini-card, .skill-card, .education-card, .project-card, .experience-item, .research-card, .cert-info-card, .cert-image-card, .contact-info-panel, .contact-form")
-        .forEach((el) => {
-          if (!el.closest("[data-stagger]") && !el.hasAttribute("data-reveal")) {
-            el.setAttribute("data-reveal", "up");
-          }
-        });
-    });
-
-    // 2) Skill bars — capture inline width into a CSS var and clear the inline width.
-    document.querySelectorAll(".skill-bar > span").forEach((bar) => {
-      const w = bar.style.width || bar.getAttribute("style")?.match(/width\s*:\s*([^;]+)/i)?.[1];
-      if (w) {
-        bar.parentElement.style.setProperty("--fill", w.trim());
-      }
-    });
-
-    // 3) IntersectionObserver — add .in-view when visible.
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in-view");
-            // Also flip nearest skill-card so its bar fills.
-            if (e.target.matches(".skills-grid")) {
-              e.target.querySelectorAll(".skill-card").forEach((c) => c.classList.add("in-view"));
-            }
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.14, rootMargin: "0px 0px -60px 0px" }
-    );
-
-    document
-      .querySelectorAll("[data-reveal], [data-stagger], .section-heading, .skill-card")
-      .forEach((el) => io.observe(el));
-
-    // 4) Cursor-follow glow for interactive cards.
-    const glowCards = document.querySelectorAll(
-      ".mini-card, .skill-card, .project-card, .research-card, .education-card, .cert-info-card, .cert-image-card, .contact-info-panel, .contact-form"
-    );
-    glowCards.forEach((card) => {
-      card.addEventListener("pointermove", (ev) => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty("--mx", `${ev.clientX - r.left}px`);
-        card.style.setProperty("--my", `${ev.clientY - r.top}px`);
-      });
-    });
+      revealTargets.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealTargets.forEach((element) => element.classList.add("in-view"));
+    }
   });
 })();
 
-// Project detail modal + image gallery with arrow swap
+// Project details and image gallery.
 (function () {
   const ready = (fn) =>
     document.readyState !== "loading"
       ? fn()
-      : document.addEventListener("DOMContentLoaded", fn);
+      : document.addEventListener("DOMContentLoaded", fn, { once: true });
 
   ready(() => {
     const modal = document.getElementById("projectModal");
     if (!modal) return;
 
-    // Keep the modal out of section stacking contexts so it always sits above the page.
-    if (modal.parentElement !== document.body) {
-      document.body.appendChild(modal);
-    }
-
-    const imgEl  = document.getElementById("pmImage");
-    const prevBtn = document.getElementById("pmPrev");
-    const nextBtn = document.getElementById("pmNext");
-    const dotsEl = document.getElementById("pmDots");
-    const typeEl = document.getElementById("pmType");
-    const titleEl = document.getElementById("pmTitle");
-    const descEl = document.getElementById("pmDesc");
-    const highlightsEl = document.getElementById("pmHighlights");
-    const techEl = document.getElementById("pmTech");
-    const githubEl = document.getElementById("pmGithub");
-
+    const image = document.getElementById("pmImage");
+    const previous = document.getElementById("pmPrev");
+    const next = document.getElementById("pmNext");
+    const dots = document.getElementById("pmDots");
+    const type = document.getElementById("pmType");
+    const title = document.getElementById("pmTitle");
+    const description = document.getElementById("pmDesc");
+    const highlights = document.getElementById("pmHighlights");
+    const technology = document.getElementById("pmTech");
+    const github = document.getElementById("pmGithub");
+    const closeButton = modal.querySelector(".project-modal__close");
     const fallbackImage = "./assets/images/projects/project-fallback.svg";
-    document.querySelectorAll(".project-cover img, #pmImage").forEach((img) => {
-      img.addEventListener("error", () => {
-        if (!img.src.endsWith("project-fallback.svg")) {
-          img.src = fallbackImage;
-        }
-      });
-    });
-
 
     const projects = {
       "student-excuse": {
         type: "Desktop Application",
         icon: "fa-solid fa-file-circle-check",
         title: "Student Excuse Generator",
-        desc: "A Java and JavaFX application that generates polished student excuse documents. Built with a clean OOP structure, it takes structured user input, processes it through templated logic, and outputs ready-to-submit formatted documents — including validation, reusable components, and file handling.",
+        description: "A Java and JavaFX application that generates polished student excuse documents. Built with a clean OOP structure, it takes structured user input, processes it through templated logic, and outputs ready-to-submit formatted documents — including validation, reusable components, and file handling.",
         highlights: [
-          "Java + JavaFX GUI with responsive layout",
+          "Java and JavaFX interface with a clear workflow",
           "Template-driven excuse generation engine",
           "Structured input validation and error handling",
           "File handling for export and reuse",
           "Modular OOP design for easy extension"
         ],
-        tech: ["Java", "JavaFX", "OOP", "GUI", "File Handling"],
+        technology: ["Java", "JavaFX", "OOP", "GUI", "File Handling"],
         github: "https://github.com/Safayet19/Student-Excuse-Generator",
         images: [
-          "./assets/images/projects/student-excuse/01-login.png",
-          "./assets/images/projects/student-excuse/02-dashboard.png",
-          "./assets/images/projects/student-excuse/03-generate-excuse.png"
+          "./assets/images/optimized/projects/student-excuse/01-login.webp",
+          "./assets/images/optimized/projects/student-excuse/02-dashboard.webp",
+          "./assets/images/optimized/projects/student-excuse/03-generate-excuse.webp"
         ]
       },
-      "hospital": {
+      hospital: {
         type: "Desktop Application",
         icon: "fa-solid fa-hospital",
         title: "Hospital Management System",
-        desc: "A Java and JavaFX based hospital management application for managing hospital records, patients, doctors, appointments, and administrative workflow. Built with an OOP-driven architecture and database-backed persistence for reliable day-to-day operations.",
+        description: "A Java and JavaFX based hospital management application for managing hospital records, patients, doctors, appointments, and administrative workflow. Built with an OOP-driven architecture and database-backed persistence for reliable day-to-day operations.",
         highlights: [
-          "Patient, doctor and staff record management",
+          "Patient, doctor, and staff record management",
           "Appointment scheduling and tracking",
           "Role-based dashboards and workflow screens",
           "Database-backed persistence with clean data models",
           "OOP architecture for maintainability and extension"
         ],
-        tech: ["Java", "JavaFX", "OOP", "Database", "GUI"],
+        technology: ["Java", "JavaFX", "OOP", "Database", "GUI"],
         github: "https://github.com/Safayet19/Hospital-Management-System-JavaFX-",
         images: [
-          "./assets/images/projects/hospital/01-login.png",
-          "./assets/images/projects/hospital/02-admin-dashboard.png",
-          "./assets/images/projects/hospital/03-doctor-dashboard.png",
-          "./assets/images/projects/hospital/04-feedback.png"
+          "./assets/images/optimized/projects/hospital/01-login.webp",
+          "./assets/images/optimized/projects/hospital/02-admin-dashboard.webp",
+          "./assets/images/optimized/projects/hospital/03-doctor-dashboard.webp",
+          "./assets/images/optimized/projects/hospital/04-feedback.webp"
         ]
       },
       "plant-disease": {
         type: "Deep Learning",
         icon: "fa-solid fa-seedling",
         title: "Plant Disease Recognition",
-        desc: "A CNN-based plant disease recognition web app that classifies plant leaf conditions using deep learning image classification. Users upload a leaf image and the trained model instantly predicts the disease class from a curated dataset.",
+        description: "A CNN-based plant disease recognition web app that classifies plant leaf conditions using deep learning image classification. Users upload a leaf image and the trained model predicts the disease class from a curated dataset.",
         highlights: [
-          "Convolutional Neural Network trained on plant leaf dataset",
-          "Instant disease classification from uploaded JPG/PNG",
-          "Clean upload UI with drag-and-drop and preview",
-          "Result panel with detected disease label",
-          "Deployed as a lightweight interactive web app"
+          "Convolutional Neural Network trained on a plant leaf dataset",
+          "Instant disease classification from uploaded images",
+          "Clear upload interface with image preview",
+          "Result panel with the detected disease label",
+          "Lightweight interactive web application"
         ],
-        tech: ["Python", "CNN", "Deep Learning", "TensorFlow", "Image Classification"],
+        technology: ["Python", "CNN", "Deep Learning", "TensorFlow", "Image Classification"],
         github: "https://github.com/Safayet19/Plant-Disease-Detection-CNN-model",
         images: [
-          "./assets/images/projects/plant-disease/01-upload.png",
-          "./assets/images/projects/plant-disease/02-result.png"
+          "./assets/images/optimized/projects/plant-disease/01-upload.webp",
+          "./assets/images/optimized/projects/plant-disease/02-result.webp"
         ]
       }
     };
 
-    let current = { key: null, index: 0 };
+    let currentProject = null;
+    let currentImage = 0;
+    let returnFocus = null;
 
-    function renderDots(count) {
-      dotsEl.innerHTML = "";
-      for (let i = 0; i < count; i++) {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.setAttribute("aria-label", `Go to image ${i + 1}`);
-        if (i === current.index) b.classList.add("is-active");
-        b.addEventListener("click", () => swapTo(i));
-        dotsEl.appendChild(b);
-      }
+    function projectData() {
+      return projects[currentProject];
     }
 
-    function swapTo(i) {
-      const data = projects[current.key];
-      if (!data) return;
-      const len = data.images.length;
-      current.index = (i + len) % len;
-      imgEl.classList.add("swap");
-      setTimeout(() => {
-        imgEl.src = data.images[current.index];
-        imgEl.classList.remove("swap");
-      }, 180);
-      [...dotsEl.children].forEach((d, idx) =>
-        d.classList.toggle("is-active", idx === current.index)
+    function updateDots() {
+      Array.from(dots.children).forEach((dot, index) => {
+        dot.classList.toggle("is-active", index === currentImage);
+        dot.setAttribute("aria-current", index === currentImage ? "true" : "false");
+      });
+    }
+
+    function showImage(index) {
+      const project = projectData();
+      if (!project) return;
+
+      currentImage = (index + project.images.length) % project.images.length;
+      image.classList.add("swap");
+
+      window.setTimeout(() => {
+        image.src = project.images[currentImage];
+        image.alt = `${project.title} screenshot ${currentImage + 1} of ${project.images.length}`;
+        image.classList.remove("swap");
+      }, 150);
+
+      updateDots();
+    }
+
+    function buildDots() {
+      const project = projectData();
+      dots.replaceChildren();
+
+      project.images.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.setAttribute("aria-label", `Show screenshot ${index + 1}`);
+        dot.addEventListener("click", () => showImage(index));
+        dots.appendChild(dot);
+      });
+
+      updateDots();
+    }
+
+    function openModal(key, trigger) {
+      const project = projects[key];
+      if (!project) return;
+
+      currentProject = key;
+      currentImage = 0;
+      returnFocus = trigger;
+
+      type.innerHTML = `<i class="${project.icon}"></i> ${project.type}`;
+      title.textContent = project.title;
+      description.textContent = project.description;
+      highlights.replaceChildren(
+        ...project.highlights.map((item) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = item;
+          return listItem;
+        })
       );
-    }
+      technology.replaceChildren(
+        ...project.technology.map((item) => {
+          const tag = document.createElement("span");
+          tag.textContent = item;
+          return tag;
+        })
+      );
+      github.href = project.github;
+      image.src = project.images[0];
+      image.alt = `${project.title} screenshot 1 of ${project.images.length}`;
+      buildDots();
 
-    function openModal(key) {
-      const data = projects[key];
-      if (!data) return;
-      current = { key, index: 0 };
-
-      typeEl.innerHTML = `<i class="${data.icon}"></i> ${data.type}`;
-      titleEl.textContent = data.title;
-      descEl.textContent = data.desc;
-      highlightsEl.innerHTML = data.highlights.map((h) => `<li>${h}</li>`).join("");
-      techEl.innerHTML = data.tech.map((t) => `<span>${t}</span>`).join("");
-      githubEl.href = data.github;
-
-      imgEl.src = data.images[0];
-      renderDots(data.images.length);
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
       document.documentElement.classList.add("modal-open");
       document.body.classList.add("modal-open");
+      closeButton.focus();
     }
 
     function closeModal() {
+      if (!modal.classList.contains("is-open")) return;
       modal.classList.remove("is-open");
       modal.setAttribute("aria-hidden", "true");
       document.documentElement.classList.remove("modal-open");
       document.body.classList.remove("modal-open");
+      if (returnFocus) returnFocus.focus();
     }
 
-    function closeModalAndNavigate(hash) {
-      closeModal();
-      if (!hash || hash === "#") return;
-
-      const target = document.getElementById(hash.slice(1));
-      if (!target) return;
-
-      window.history.pushState(null, "", hash);
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    document.querySelectorAll("[data-project]").forEach((a) => {
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        openModal(a.getAttribute("data-project"));
+    document.querySelectorAll("[data-project]").forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        openModal(trigger.dataset.project, trigger);
       });
     });
 
-    modal.querySelectorAll("[data-close]").forEach((el) =>
-      el.addEventListener("click", closeModal)
-    );
-
-    document.addEventListener(
-      "click",
-      (e) => {
-        if (!modal.classList.contains("is-open")) return;
-        if (modal.contains(e.target)) return;
-
-        const hashLink = e.target.closest('a[href^="#"]');
-        if (hashLink) {
-          e.preventDefault();
-          e.stopPropagation();
-          closeModalAndNavigate(hashLink.getAttribute("href"));
-          return;
-        }
-
-        e.preventDefault();
-        e.stopPropagation();
-      },
-      true
-    );
-
-    prevBtn.addEventListener("click", () => swapTo(current.index - 1));
-    nextBtn.addEventListener("click", () => swapTo(current.index + 1));
-
-    window.addEventListener("hashchange", () => {
-      if (modal.classList.contains("is-open")) closeModal();
+    modal.querySelectorAll("[data-close]").forEach((control) => {
+      control.addEventListener("click", closeModal);
     });
 
-    document.addEventListener("keydown", (e) => {
+    previous.addEventListener("click", () => showImage(currentImage - 1));
+    next.addEventListener("click", () => showImage(currentImage + 1));
+
+    image.addEventListener("error", () => {
+      if (!image.src.endsWith("project-fallback.svg")) image.src = fallbackImage;
+    });
+
+    document.addEventListener("keydown", (event) => {
       if (!modal.classList.contains("is-open")) return;
-      if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowLeft") swapTo(current.index - 1);
-      if (e.key === "ArrowRight") swapTo(current.index + 1);
+      if (event.key === "Escape") closeModal();
+      if (event.key === "ArrowLeft") showImage(currentImage - 1);
+      if (event.key === "ArrowRight") showImage(currentImage + 1);
     });
   });
 })();

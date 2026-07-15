@@ -1,0 +1,414 @@
+/* Safayet portfolio: final visual authority.
+   One palette only: carbon, pearl, warm gray, and controlled copper. */
+
+.site-header,
+.section,
+.professional-footer,
+.project-modal {
+  --signature-bg: #111014;
+  --signature-surface: #1a181d;
+  --signature-elevated: #211e23;
+  --signature-pearl: #f2efe9;
+  --signature-muted: #a29b97;
+  --signature-copper: #d57949;
+  --signature-copper-soft: #e59a6e;
+  --signature-line: rgba(255, 255, 255, 0.085);
+}
+
+.site-header {
+  border-bottom-color: rgba(213, 121, 73, 0.27);
+  background: rgba(17, 16, 20, 0.975);
+  box-shadow: 0 14px 42px rgba(3, 2, 4, 0.34);
+}
+.site-header .logo-brand {
+  color: var(--signature-pearl);
+}
+.site-header .logo-brand span,
+.site-header .navbar a {
+  font-family: "Manrope", sans-serif;
+}
+.site-header .navbar a {
+  color: #aaa39f;
+  font-size: clamp(1.62rem, 1.22vw, 1.85rem);
+  font-weight: 700;
+}
+.site-header .navbar a:hover,
+.site-header .navbar a.active {
+  color: var(--signature-copper-soft);
+}
+.site-header .navbar a::after {
+  background: var(--signature-copper);
+  box-shadow: none;
+}
+
+.section,
+.professional-footer,
+.project-modal {
+  font-family: "Inter", sans-serif;
+}
+.section {
+  --pro-ink: var(--signature-pearl);
+  --pro-muted: var(--signature-muted);
+  --pro-blue: var(--signature-copper);
+  --pro-blue-dark: #b85f36;
+  --pro-cyan: #bf8666;
+  --pro-line: var(--signature-line);
+  --pro-panel: var(--signature-elevated);
+  --pro-soft: #252126;
+  border-top-color: rgba(213, 121, 73, 0.1);
+}
+
+.about.section,
+.skills.section,
+.education.section,
+.projects.section,
+.experience.section,
+.research.section,
+.certifications.section,
+.contact.section {
+  background:
+    radial-gradient(circle at 88% 5%, rgba(124, 55, 66, 0.095), transparent 30%),
+    radial-gradient(circle at 8% 92%, rgba(213, 121, 73, 0.045), transparent 28%),
+    var(--signature-bg);
+}
+
+.section > .container::before,
+.experience .experience-item::after {
+  content: none !important;
+  display: none !important;
+}
+
+.section .section-heading h2,
+.section .main-about-card h3,
+.section .mini-card h3,
+.section .skill-card h3,
+.section .education-content h3,
+.section .project-card h3,
+.section .experience-content h3,
+.section .research-card h3,
+.section .cert-info-card h3,
+.section .contact-info-panel h3,
+.section .contact-form h3 {
+  color: var(--signature-pearl);
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+.section .section-heading h2 {
+  color: #f5f2ed;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  text-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+}
+.section .section-heading p,
+.section .main-about-card p,
+.section .mini-card p,
+.section .education-content p,
+.section .project-card p,
+.section .experience-content p,
+.section .cert-info-card p,
+.section .contact-info-panel > p,
+.skills .section-heading p,
+.research .section-heading p {
+  color: var(--signature-muted);
+  font-weight: 400;
+  letter-spacing: -0.008em;
+  line-height: 1.75;
+}
+
+.section .eyebrow,
+.skills .eyebrow,
+.research .eyebrow,
+.about .card-label,
+.education .education-content > span,
+.projects .project-type,
+.experience .experience-content > span,
+.project-modal__body .eyebrow {
+  color: var(--signature-copper-soft);
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+.section .eyebrow::before {
+  background: var(--signature-copper);
+}
+
+.about .main-about-card,
+.skills .skill-card,
+.education .education-card,
+.projects .project-card,
+.experience .experience-item,
+.research .research-card,
+.research .research-card:first-child,
+.certifications .certification-showcase,
+.contact .contact-info-panel,
+.contact .contact-form {
+  border-color: var(--signature-line);
+  background: linear-gradient(145deg, var(--signature-elevated), var(--signature-surface));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 24px 64px rgba(3, 2, 4, 0.27);
+}
+.about .main-about-card,
+.research .research-card:first-child {
+  box-shadow: inset 3px 0 0 var(--signature-copper), inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 24px 64px rgba(3, 2, 4, 0.27);
+}
+.about .mini-card,
+.certifications .cert-info-card {
+  border-color: var(--signature-line);
+  background: linear-gradient(145deg, #201d22, #19171b);
+}
+.about .mini-card:hover,
+.skills .skill-card:hover,
+.education .education-card:hover,
+.projects .project-card:hover,
+.experience .experience-item:hover,
+.research .research-card:hover {
+  border-color: rgba(213, 121, 73, 0.35);
+  background: linear-gradient(145deg, #252126, #1d1a1f);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 30px 74px rgba(3, 2, 4, 0.34);
+}
+
+.about .mini-card i,
+.skills .skill-top i,
+.experience .experience-marker,
+.certifications .cert-icon {
+  border-color: rgba(213, 121, 73, 0.27);
+  background: rgba(213, 121, 73, 0.075);
+  color: var(--signature-copper-soft);
+}
+.about .about-points span,
+.skills .skill-tags span,
+.research .research-meta span,
+.contact .contact-row,
+.education .education-tags span,
+.projects .project-tech span,
+.project-modal .project-tech span {
+  border-color: var(--signature-line);
+  background: rgba(255, 255, 255, 0.032);
+  color: #c3bdb9;
+}
+.about .about-points i,
+.skills .skill-top strong,
+.research .research-meta i,
+.contact .contact-row i,
+.certifications .cert-details i {
+  color: var(--signature-copper);
+}
+
+.skills .skill-card::after {
+  background: linear-gradient(90deg, transparent, var(--signature-copper), var(--signature-copper-soft), transparent);
+}
+.skills .skill-bar {
+  background: rgba(255, 255, 255, 0.065);
+}
+.skills .skill-bar span {
+  background: linear-gradient(90deg, #b95f36, var(--signature-copper-soft));
+  box-shadow: 0 0 12px rgba(213, 121, 73, 0.2);
+}
+.education .education-wrapper::before {
+  background: linear-gradient(var(--signature-copper), rgba(213, 121, 73, 0.36), rgba(213, 121, 73, 0.035));
+}
+.education .education-card::before {
+  background: var(--signature-copper);
+  box-shadow: 0 0 0 1px var(--signature-copper), 0 0 14px rgba(213, 121, 73, 0.25);
+}
+.education .education-content h4,
+.research .authors {
+  color: #c69274;
+}
+
+.projects .project-cover img {
+  filter: saturate(0.72) contrast(1.04) brightness(0.93);
+}
+.projects .project-card:hover .project-cover img {
+  filter: saturate(0.84) contrast(1.045) brightness(0.96);
+}
+.projects .project-cover::after {
+  background: linear-gradient(180deg, transparent 45%, rgba(17, 16, 20, 0.84));
+}
+.projects .project-links a:first-child,
+.contact .contact-form button,
+.pm-btn {
+  border-color: transparent;
+  background: linear-gradient(100deg, #bf6339, var(--signature-copper-soft));
+  color: #171014;
+  box-shadow: 0 14px 30px rgba(129, 57, 28, 0.22);
+}
+.projects .project-links a:last-child {
+  border-color: var(--signature-line);
+  background: rgba(255, 255, 255, 0.03);
+  color: #ddd7d2;
+}
+
+/* Research: one consistent editorial timeline and one card per row. */
+.research .research-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.4rem;
+  padding-left: 3rem;
+}
+.research .research-grid::before {
+  content: "";
+  position: absolute;
+  top: 2.8rem;
+  bottom: 2.8rem;
+  left: 0.7rem;
+  width: 1px;
+  background: linear-gradient(var(--signature-copper), rgba(213, 121, 73, 0.14));
+}
+.research .research-card,
+.research .research-card:first-child {
+  position: relative;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 13.5rem minmax(0, 1fr);
+  column-gap: 3rem;
+  row-gap: 1rem;
+  min-height: 0;
+  overflow: visible;
+  padding: 2.8rem 3.2rem;
+  border-radius: 1.4rem;
+  background: linear-gradient(115deg, #211e23, #18171a);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025), 0 20px 52px rgba(3, 2, 4, 0.24);
+}
+.research .research-card:first-child {
+  box-shadow: inset 3px 0 0 var(--signature-copper), 0 20px 52px rgba(3, 2, 4, 0.24);
+}
+.research .research-card::before {
+  content: "";
+  position: absolute;
+  top: 3.3rem;
+  left: -2.85rem;
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid var(--signature-bg);
+  border-radius: 50%;
+  background: var(--signature-copper);
+  box-shadow: 0 0 0 4px var(--signature-bg), 0 0 0 5px rgba(213, 121, 73, 0.42);
+}
+.research .research-status {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  align-self: start;
+  justify-self: start;
+  margin: 0;
+  border-color: rgba(213, 121, 73, 0.25);
+  background: rgba(213, 121, 73, 0.07);
+  color: #d8a184;
+  font-family: "Manrope", sans-serif;
+}
+.research .research-status.accepted {
+  border-color: rgba(77, 166, 128, 0.34);
+  background: rgba(77, 166, 128, 0.1);
+  color: #8fd2b3;
+}
+.research .research-status.review {
+  border-color: rgba(213, 121, 73, 0.3);
+  background: rgba(213, 121, 73, 0.09);
+  color: #e2a17e;
+}
+.research .research-card h3,
+.research .authors,
+.research .research-meta {
+  grid-column: 2;
+}
+.research .research-card h3 {
+  margin: 0;
+  font-size: clamp(2rem, 2.2vw, 2.75rem);
+  line-height: 1.3;
+}
+.research .authors {
+  margin: 0;
+  color: #c69274;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.research .research-meta {
+  margin-top: 0.5rem;
+}
+.research .research-meta span {
+  border-color: var(--signature-line);
+  background: rgba(255, 255, 255, 0.03);
+  color: #bbb4b0;
+}
+
+.certifications .cert-badge {
+  border-color: rgba(213, 121, 73, 0.26);
+  background: rgba(213, 121, 73, 0.07);
+  color: #dca17f;
+}
+.certifications .cert-details li {
+  border-color: var(--signature-line);
+  color: #c3bdb9;
+}
+.certifications .cert-image-card {
+  border-color: var(--signature-line);
+  background: linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px), #19171b;
+  background-size: 44px 44px, 44px 44px, auto;
+}
+
+.contact .contact-form input,
+.contact .contact-form textarea {
+  border-color: var(--signature-line);
+  background: rgba(255, 255, 255, 0.032);
+  color: var(--signature-pearl);
+}
+.contact .contact-form input:focus,
+.contact .contact-form textarea:focus {
+  border-color: var(--signature-copper);
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 0 0 4px rgba(213, 121, 73, 0.09);
+}
+.professional-footer {
+  border-top-color: rgba(213, 121, 73, 0.2);
+  background: #0d0c0f;
+}
+#scroll-top {
+  border-color: rgba(213, 121, 73, 0.3);
+  background: #201c21;
+  color: var(--signature-copper-soft);
+}
+
+@media (max-width: 1200px) {
+  .site-header .navbar {
+    border-left-color: rgba(213, 121, 73, 0.17);
+    background: rgba(17, 16, 20, 0.995);
+  }
+  .site-header .navbar a {
+    font-size: 1.62rem;
+  }
+  .site-header .navbar a:hover,
+  .site-header .navbar a.active {
+    background: rgba(213, 121, 73, 0.075);
+    color: var(--signature-copper-soft);
+  }
+}
+
+@media (max-width: 760px) {
+  .research .research-grid {
+    padding-left: 2.2rem;
+  }
+  .research .research-grid::before {
+    left: 0.45rem;
+  }
+  .research .research-card,
+  .research .research-card:first-child {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.2rem;
+    padding: 2.4rem 2rem;
+  }
+  .research .research-card::before {
+    left: -2.3rem;
+  }
+  .research .research-status {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .research .research-card h3,
+  .research .authors,
+  .research .research-meta {
+    grid-column: 1;
+  }
+}

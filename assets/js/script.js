@@ -45,7 +45,20 @@ function setActiveLink() {
   }
 }
 
-window.addEventListener("scroll", setActiveLink);
+let scrollFramePending = false;
+
+window.addEventListener(
+  "scroll",
+  () => {
+    if (scrollFramePending) return;
+    scrollFramePending = true;
+    window.requestAnimationFrame(() => {
+      setActiveLink();
+      scrollFramePending = false;
+    });
+  },
+  { passive: true }
+);
 setActiveLink();
 
 // Typing effect
@@ -98,6 +111,9 @@ const canvas = document.getElementById("particles-js");
 const ctx = canvas.getContext("2d");
 let particles = [];
 let mouse = { x: null, y: null, radius: 120 };
+let particleFrame = 0;
+let particlesActive = true;
+let resizeFrame = 0;
 
 function resizeCanvas() {
   canvas.width = canvas.offsetWidth;
@@ -105,9 +121,17 @@ function resizeCanvas() {
   initParticles();
 }
 
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener(
+  "resize",
+  () => {
+    window.cancelAnimationFrame(resizeFrame);
+    resizeFrame = window.requestAnimationFrame(resizeCanvas);
+  },
+  { passive: true }
+);
 
 window.addEventListener("mousemove", (event) => {
+  if (!particlesActive) return;
   const rect = canvas.getBoundingClientRect();
   mouse.x = event.clientX - rect.left;
   mouse.y = event.clientY - rect.top;
@@ -187,6 +211,11 @@ function connectParticles() {
 }
 
 function animateParticles() {
+  if (!particlesActive || document.hidden) {
+    particleFrame = 0;
+    return;
+  }
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   particles.forEach((particle) => {
@@ -195,12 +224,44 @@ function animateParticles() {
   });
 
   connectParticles();
-  requestAnimationFrame(animateParticles);
+  particleFrame = requestAnimationFrame(animateParticles);
+}
+
+function startParticles() {
+  particlesActive = true;
+  if (!particleFrame && !document.hidden) animateParticles();
+}
+
+function stopParticles() {
+  particlesActive = false;
+  if (particleFrame) cancelAnimationFrame(particleFrame);
+  particleFrame = 0;
 }
 
 if (canvas) {
   resizeCanvas();
-  animateParticles();
+  startParticles();
+
+  const homeSection = canvas.closest(".home");
+  if (homeSection && "IntersectionObserver" in window) {
+    const homeObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) startParticles();
+        else stopParticles();
+      },
+      { threshold: 0.01 }
+    );
+    homeObserver.observe(homeSection);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (particleFrame) cancelAnimationFrame(particleFrame);
+      particleFrame = 0;
+    } else if (particlesActive) {
+      startParticles();
+    }
+  });
 }
 
 // Contact form: open Gmail compose with the visitor's message pre-filled.
